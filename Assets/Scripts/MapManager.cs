@@ -7,8 +7,8 @@ public class MapManager : MonoBehaviour
     public GameObject[] wallArray;
     public GameObject[] grassArray;
     public GameObject[] landArray;
-    public static int row = 50;
-    public static int col = 50;
+    public static int row = 100;
+    public static int col = 100;
     public Transform mapholder;
 
 //	public static List<Vector2> grassPositionList = new List<Vector2>();

@@ -6,7 +6,7 @@ public class car : MonoBehaviour {
     public float turningAngle;
     public const int ACCELERATE_TIME = 30;
     public int accelerateTimeLeft;
-    public float velocity = 10f;
+    public float velocity = 1.5f;
 
     private Rigidbody2D rigi;
     private Vector2 previousVelocity;

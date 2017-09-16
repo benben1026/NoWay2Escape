@@ -37,18 +37,18 @@ public class Zombie : MonoBehaviour {
 	void FixedUpdate () {
 		if (isCarFound) {
 			chasing ();
-//			print ("carfound");
+			//			print ("carfound");
 		} else {
 			randomMove ();
-//			print ("carnofound");
+			//			print ("carnofound");
 		}
 	}
 	void chasing(){
-//		Turningcount++;
-//		if (Turningcount == 40) {
-//			Turningcount = 0;
-//		} else
-//			return;
+		//		Turningcount++;
+		//		if (Turningcount == 40) {
+		//			Turningcount = 0;
+		//		} else
+		//			return;
 		float selfX = this.transform.position.x;
 		float selfY = this.transform.position.y;
 		Vector2 dir = (new Vector2(targetX,targetY)) - (new Vector2(selfX,selfY));
@@ -61,7 +61,7 @@ public class Zombie : MonoBehaviour {
 		//this.rigi.velocity = Vector2.zero;
 	}
 	void randomMove(){
-		
+
 		if (!isTurning) {
 			if (rnd.Next (0, 15) < threadHold) {
 				randomDir ();
@@ -75,7 +75,7 @@ public class Zombie : MonoBehaviour {
 			}
 		}
 		float move = currentDir;
-//		print(rigi.velocity.magnitude);
+		//		print(rigi.velocity.magnitude);
 
 		if (move == 1)
 		{
@@ -99,32 +99,32 @@ public class Zombie : MonoBehaviour {
 		currentDir = rnd.Next (-1, 2);
 	}
 	private void OnTriggerEnter2D(Collider2D other){
-		
+
 		if (other.GetComponent<car> () != null) {
 			isCarFound = true;
-//			print ("found");
+			//			print ("found");
 			targetX = other.transform.position.x;
 			targetY = other.transform.position.y;
-//			print (targetX);
-//			print (targetY);
+			//			print (targetX);
+			//			print (targetY);
 		}
 	}
 	private void OnTriggerStay2D(Collider2D other){
 
 		if (other.GetComponent<car> () != null) {
 			isCarFound = true;
-//			print ("stay");
+			//			print ("stay");
 			targetX = other.transform.position.x;
 			targetY = other.transform.position.y;
-//			print (targetX);
-//			print (targetY);
+			//			print (targetX);
+			//			print (targetY);
 		}
 	}
 	private void OnTriggerExit2D(Collider2D other){
 
 		if (other.GetComponent<car> () != null) {
 			isCarFound = false;
-//			print ("exit");
+			//			print ("exit");
 
 		}
 	}

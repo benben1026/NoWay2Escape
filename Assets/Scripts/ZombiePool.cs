@@ -12,6 +12,8 @@ public class ZombiePool : MonoBehaviour {
 	public GameObject zombiePrefab;
 	public int threadHold = 5;
 	private Vector2 objectPoolPosition;
+	private int startedge = 20;
+	private int endedge = 60;
 
 
 	public List<GameObject> pooledObjects;
@@ -26,7 +28,7 @@ public class ZombiePool : MonoBehaviour {
 		zombies = new GameObject[zombiePoolSize];
 		rnd = new System.Random();
 		for (int i = 0; i < zombiePoolSize; i++) {
-			objectPoolPosition = new Vector2 (rnd.Next(-5,5), rnd.Next(-5,5));
+			objectPoolPosition = new Vector2 (rnd.Next(startedge,endedge), rnd.Next(startedge,endedge));
 			zombies [i] = (GameObject)Instantiate (zombiePrefab,objectPoolPosition, gameObject.transform.rotation);
 			zombies [i].transform.position = objectPoolPosition;
 			
