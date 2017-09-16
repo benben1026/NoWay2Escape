@@ -30,9 +30,8 @@ public class car : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
-        float move = Input.GetAxis("Horizontal");
-        print(rigi.velocity.magnitude);
+	void FixedUpdate () {
+		float move = Input.GetAxis("Horizontal");
 
 		if (move == 1 && this.engineFlag && !this.accelerateFlag)
         {
