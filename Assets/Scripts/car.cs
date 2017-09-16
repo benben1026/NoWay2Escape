@@ -6,6 +6,7 @@ public class car : MonoBehaviour {
 	public float turningAngle;
 	public const int ACCELERATE_TIME = 30;
 	public int accelerateTimeLeft;
+	public float velocity = 10f;
 
     private Rigidbody2D rigi;
 	private Vector2 previousVelocity;
@@ -20,7 +21,7 @@ public class car : MonoBehaviour {
     
     // Use this for initialization
     void Start () {
-        this.rigi.velocity = new Vector2(0f, 0.5f);
+		this.rigi.velocity = new Vector2(0f, this.velocity);
 		this.previousVelocity = this.rigi.velocity;
         this.turningAngle = 0.02f; // Radian
 		this.engineFlag = true;
@@ -32,6 +33,7 @@ public class car : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		float move = Input.GetAxis("Horizontal");
+		print (this.rigi.velocity.magnitude);
 
 		if (move == 1 && this.engineFlag && !this.accelerateFlag)
         {
