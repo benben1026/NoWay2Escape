@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System; 
 using UnityEngine;
 
 public class Zombie : MonoBehaviour {
@@ -24,7 +23,9 @@ public class Zombie : MonoBehaviour {
 	void Start () {
 		this.rigi.velocity = new Vector2(0f, 1.5f);
 		this.turningAngle = 0.02f; // Radian
-		rnd = new System.Random();
+
+		rnd = new System.Random(Guid.NewGuid().GetHashCode());
+
 		currentDir = 0;
 		randomDir();
 		isTurning = false;
@@ -101,29 +102,29 @@ public class Zombie : MonoBehaviour {
 		
 		if (other.GetComponent<car> () != null) {
 			isCarFound = true;
-			print ("found");
+//			print ("found");
 			targetX = other.transform.position.x;
 			targetY = other.transform.position.y;
-			print (targetX);
-			print (targetY);
+//			print (targetX);
+//			print (targetY);
 		}
 	}
 	private void OnTriggerStay2D(Collider2D other){
 
 		if (other.GetComponent<car> () != null) {
 			isCarFound = true;
-			print ("stay");
+//			print ("stay");
 			targetX = other.transform.position.x;
 			targetY = other.transform.position.y;
-			print (targetX);
-			print (targetY);
+//			print (targetX);
+//			print (targetY);
 		}
 	}
 	private void OnTriggerExit2D(Collider2D other){
 
 		if (other.GetComponent<car> () != null) {
 			isCarFound = false;
-			print ("exit");
+//			print ("exit");
 
 		}
 	}
