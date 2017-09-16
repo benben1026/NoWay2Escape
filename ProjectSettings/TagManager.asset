@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Grass
+  - wall
   layers:
   - Default
   - TransparentFX
@@ -40,4 +42,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: background
+    uniqueID: 2312604723
+    locked: 0
+  - name: grass
+    uniqueID: 2437334657
+    locked: 0
+  - name: player
+    uniqueID: 220414221
     locked: 0
