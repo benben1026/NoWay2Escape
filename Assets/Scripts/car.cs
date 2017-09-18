@@ -7,6 +7,7 @@ public class car : MonoBehaviour {
     public const int ACCELERATE_TIME = 30;
     public int accelerateTimeLeft;
     public float velocity ;
+	public static car instance;
 
     private Rigidbody2D rigi;
     private Vector2 previousVelocity;
@@ -18,6 +19,11 @@ public class car : MonoBehaviour {
     private void Awake()
     {
         rigi = GetComponent<Rigidbody2D>();
+		if (instance == null) {
+			instance = this;
+		} else if (instance != this) {
+			Destroy (instance);
+		}
     }
     
     // Use this for initialization
