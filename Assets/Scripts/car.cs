@@ -5,6 +5,7 @@ using UnityEngine;
 public class car : MonoBehaviour {
     public float turningAngle;
     public const int ACCELERATE_TIME = 30;
+	public const float VELOCITY = 4f;
     public int accelerateTimeLeft;
     public float velocity ;
 	public static car instance;
@@ -14,7 +15,7 @@ public class car : MonoBehaviour {
     private bool engineFlag;
     private bool accelerateFlag;
     private int accelerateCountdown;
-	public bool isAlive;
+	private bool alive;
     
     private void Awake()
     {
@@ -28,20 +29,48 @@ public class car : MonoBehaviour {
     
     // Use this for initialization
     void Start () {
-		velocity = 1.7f;
-		this.rigi.velocity = new Vector2(0f, 1.7f);
+		this.rigi.velocity = new Vector2(0f, VELOCITY);
         this.previousVelocity = this.rigi.velocity;
         this.turningAngle = 0.02f; // Radian
         this.engineFlag = true;
         this.accelerateFlag = false;
         this.accelerateCountdown = ACCELERATE_TIME;
         this.accelerateTimeLeft = 3;
-		isAlive = true;
+		this.alive = true;
     }
+
+	public void updateVeclocity(float scale){
+		if (scale <= 0){
+			return;
+		}
+		if (this.rigi.velocity.magnitude == 0) {
+			return;
+		}
+		this.rigi.velocity = this.rigi.velocity * scale;
+	}
+
+	public Vector2 getVelocity(){
+		return this.rigi.velocity;
+	}
+
+	public Vector2 getPosition(){
+		return this.rigi.position;
+	}
+
+	public bool isMoving(){
+		if (this.rigi.velocity.magnitude == 0)
+			return false;
+		else
+			return true;
+	}
+
+	public bool isAlive(){
+		return this.alive;
+	}
     
     // Update is called once per frame
     void FixedUpdate () {
-		if (isAlive == false)
+		if (this.alive == false)
 			return;
         float move = Input.GetAxis("Horizontal");
 
@@ -95,7 +124,7 @@ public class car : MonoBehaviour {
 			float dy = carY - targetY;
 			if (dx * dx + dy * dy < 1) {
 				this.rigi.velocity = Vector2.zero;
-				isAlive = false;
+				this.alive = false;
 				GameController.instance.gameOver ();
 			}
 
