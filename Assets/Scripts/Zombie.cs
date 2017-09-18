@@ -13,6 +13,7 @@ public class Zombie : MonoBehaviour {
 	public bool isCarFound;
 	public float targetX;
 	public float targetY;
+	public float constantV;
 
 	private void Awake()
 	{
@@ -21,7 +22,8 @@ public class Zombie : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		this.rigi.velocity = new Vector2(0f, 1.5f);
+		constantV = 1.6f;
+		this.rigi.velocity = new Vector2(0f, constantV);
 		this.turningAngle = 0.02f; // Radian
 
 		rnd = new System.Random(Guid.NewGuid().GetHashCode());
@@ -35,6 +37,13 @@ public class Zombie : MonoBehaviour {
 
 	// Update is called once per frame
 	void FixedUpdate () {
+		if (this.rigi.velocity.magnitude < constantV) {
+			this.rigi.velocity = new Vector2(0f, constantV);
+			transform.Rotate(0, 0, 30 / Mathf.PI);
+		}
+			
+
+
 		if (isCarFound) {
 			chasing ();
 			//			print ("carfound");
@@ -54,7 +63,29 @@ public class Zombie : MonoBehaviour {
 		Vector2 dir = (new Vector2(targetX,targetY)) - (new Vector2(selfX,selfY));
 		float cosangle = Vector2.Dot (dir, this.rigi.velocity)/(dir.magnitude * this.rigi.velocity.magnitude);
 		float angle = Mathf.Acos (cosangle);
-		transform.Rotate(0, 0, (-1) * angle * 180 / Mathf.PI);
+		Vector2 currV = this.rigi.velocity;
+		float alphx = currV.x;
+		float alphy = currV.y;
+		float thy = (targetX - selfX) * alphy / alphx + selfY;
+
+//		if (thy < targetY) {
+//			if (alphx > 0)
+////				this.transform.Rotate (0, 0, (-1) * angle * 180 / Mathf.PI);
+//				this.transform.Rotate (0, 0, angle * 180 / Mathf.PI);
+//			else if (alphx < 0)
+////				this.transform.Rotate (0, 0, angle * 180 / Mathf.PI);
+//				this.transform.Rotate (0, 0, (-1) * angle * 180 / Mathf.PI);
+//		} else if (thy > targetY) {
+//			if (alphx > 0)
+////				this.transform.Rotate (0, 0, angle * 180 / Mathf.PI);
+//				this.transform.Rotate (0, 0, (-1) * angle * 180 / Mathf.PI);
+//			else if (alphx < 0)
+////				this.transform.Rotate (0, 0, (-1) * angle * 180 / Mathf.PI);
+//				this.transform.Rotate (0, 0, angle * 180 / Mathf.PI);
+//		}
+
+		this.transform.Rotate (dir.x * Time.deltaTime, dir.y * Time.deltaTime, 0, Space.Self);
+
 		float x = this.rigi.velocity.x;
 		float y = this.rigi.velocity.y;
 		this.rigi.velocity = new Vector2(x * Mathf.Cos(angle) + y * Mathf.Sin(angle), (-1) * x * Mathf.Sin(angle) + y * Mathf.Cos(angle));

@@ -6,13 +6,14 @@ public class car : MonoBehaviour {
     public float turningAngle;
     public const int ACCELERATE_TIME = 30;
     public int accelerateTimeLeft;
-    public float velocity = 1.5f;
+    public float velocity ;
 
     private Rigidbody2D rigi;
     private Vector2 previousVelocity;
     private bool engineFlag;
     private bool accelerateFlag;
     private int accelerateCountdown;
+	public bool isAlive;
     
     private void Awake()
     {
@@ -21,17 +22,21 @@ public class car : MonoBehaviour {
     
     // Use this for initialization
     void Start () {
-        this.rigi.velocity = new Vector2(0f, this.velocity);
+		velocity = 1.7f;
+		this.rigi.velocity = new Vector2(0f, 1.7f);
         this.previousVelocity = this.rigi.velocity;
         this.turningAngle = 0.02f; // Radian
         this.engineFlag = true;
         this.accelerateFlag = false;
         this.accelerateCountdown = ACCELERATE_TIME;
         this.accelerateTimeLeft = 3;
+		isAlive = true;
     }
     
     // Update is called once per frame
     void FixedUpdate () {
+		if (isAlive == false)
+			return;
         float move = Input.GetAxis("Horizontal");
 
         if (move == 1 && this.engineFlag && !this.accelerateFlag)
@@ -73,4 +78,22 @@ public class car : MonoBehaviour {
         }
         
     }
+	private void OnTriggerStay2D(Collider2D other){
+
+		if (other.GetComponent<Zombie> () != null) {
+			float targetX = other.transform.position.x;
+			float targetY = other.transform.position.y;
+			float carX = this.transform.position.x;
+			float carY = this.transform.position.y;
+			float dx = carX - targetX;
+			float dy = carY - targetY;
+			if (dx * dx + dy * dy < 1) {
+				this.rigi.velocity = Vector2.zero;
+				isAlive = false;
+				GameController.instance.gameOver ();
+			}
+
+		}
+	}
+
 }

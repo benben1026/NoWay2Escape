@@ -9,20 +9,21 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1472334715874440}
+  m_RootGameObject: {fileID: 1813599392940170}
   m_IsPrefabParent: 1
---- !u!1 &1472334715874440
+--- !u!1 &1813599392940170
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4349095448215778}
-  - component: {fileID: 212811818275564070}
-  - component: {fileID: 114360830471134802}
-  - component: {fileID: 50799447740154992}
-  - component: {fileID: 58244521755225088}
+  - component: {fileID: 4645613269152344}
+  - component: {fileID: 212281328174567224}
+  - component: {fileID: 114941911299671216}
+  - component: {fileID: 50749975998408348}
+  - component: {fileID: 58473407073496828}
+  - component: {fileID: 61603622547742820}
   m_Layer: 0
   m_Name: zombieBird
   m_TagString: Untagged
@@ -30,12 +31,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4349095448215778
+--- !u!4 &4645613269152344
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1472334715874440}
+  m_GameObject: {fileID: 1813599392940170}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 16.54, y: 14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -43,13 +44,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50799447740154992
+--- !u!50 &50749975998408348
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1472334715874440}
+  m_GameObject: {fileID: 1813599392940170}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -63,12 +64,12 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &58244521755225088
+--- !u!58 &58473407073496828
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1472334715874440}
+  m_GameObject: {fileID: 1813599392940170}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -77,13 +78,38 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3.5
---- !u!114 &114360830471134802
+  m_Radius: 6
+--- !u!61 &61603622547742820
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1813599392940170}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.13, y: 0.67}
+    newSize: {x: 1.13, y: 0.67}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.13, y: 0.67}
+  m_EdgeRadius: 0
+--- !u!114 &114941911299671216
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1472334715874440}
+  m_GameObject: {fileID: 1813599392940170}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ca83c481a5d448fcbc0d99fdd112961, type: 3}
@@ -94,12 +120,13 @@ MonoBehaviour:
   isCarFound: 0
   targetX: 0
   targetY: 0
---- !u!212 &212811818275564070
+  constantV: 0
+--- !u!212 &212281328174567224
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1472334715874440}
+  m_GameObject: {fileID: 1813599392940170}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
