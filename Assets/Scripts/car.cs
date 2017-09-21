@@ -16,6 +16,7 @@ public class car : MonoBehaviour {
     private bool accelerateFlag;
     private int accelerateCountdown;
 	private bool alive;
+	private bool grassFlag;
     
     private void Awake()
     {
@@ -37,6 +38,7 @@ public class car : MonoBehaviour {
         this.accelerateCountdown = ACCELERATE_TIME;
         this.accelerateTimeLeft = 3;
 		this.alive = true;
+		this.grassFlag = false;
     }
 
 	public void updateVeclocity(float scale){
@@ -70,6 +72,7 @@ public class car : MonoBehaviour {
     
     // Update is called once per frame
     void FixedUpdate () {
+		print (this.rigi.velocity.magnitude);
 		if (this.alive == false)
 			return;
         float move = Input.GetAxis("Horizontal");
@@ -115,8 +118,21 @@ public class car : MonoBehaviour {
         }
         
     }
-	private void OnTriggerStay2D(Collider2D other){
 
+	private void OnTriggerEnter2D(Collider2D other){
+		if (other.GetComponent<GrassLand> () != null) {
+
+			this.updateVeclocity (0.5f);
+		}
+	}
+
+	private void OnTriggerExit2D(Collider2D other){
+		if (other.GetComponent<GrassLand> () != null) {
+			this.updateVeclocity (2f);
+		}
+	}
+
+	private void OnTriggerStay2D(Collider2D other){
 		if (other.GetComponent<Zombie> () != null) {
 			float targetX = other.transform.position.x;
 			float targetY = other.transform.position.y;
