@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
 	public static GameController instance;
-	public GameObject gameOverText;
-	public bool isSuccess;
-	public bool isFailed;
+    public Text gamePromptText;
+    public Text countDownText;
+
+    private int timeLeft;
+    private float time;
+    private int gameStatus;   // 0 -> ongoing; 1-> success; 2-> fail
 	// Use this for initialization
 	void Awake () {
 		if (instance == null) {
@@ -14,25 +18,44 @@ public class GameController : MonoBehaviour {
 		} else if (instance != this) {
 			Destroy (gameObject);
 		}
-
 	}
 	void Start () {
-//		Instantiate (enemy);
-		isSuccess = false;
-		isFailed = false;
-		gameOverText.SetActive (false);
+        gamePromptText.enabled = false;
+        timeLeft = 60;
+        updateTime();
+        time = 0.0f;
+        gameStatus = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-//		if (instance == null) {
-//			instance = this;
-//			print ("instance is null");
-//		}
+        time += Time.deltaTime;
+
+        if (time > 1.0f)
+        {
+            time = 0.0f;
+            if (gameStatus == 0) {
+                timeLeft--;
+            }
+            updateTime();
+        }
+        
 	}
 	public void gameOver(){
-		isFailed = true;
-//		print ("failed");
-		gameOverText.SetActive (true);
+        gameStatus = 2;
+        gamePromptText.text = "Game Over";
+        gamePromptText.enabled = true;
 	}
+
+    public void gameWin()
+    {
+        gameStatus = 1;
+        gamePromptText.text = "Congratulations!";
+        gamePromptText.enabled = true;
+    }
+
+    private void updateTime()
+    {
+        countDownText.text = "Time Left: " + timeLeft.ToString() + " s";
+    }
 }

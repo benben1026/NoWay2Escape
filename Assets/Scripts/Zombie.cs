@@ -53,7 +53,7 @@ public class Zombie : MonoBehaviour {
 		}
 	}
 	void chasing(){
-        if (!car.instance.isAlive())
+        if (!Car.instance.isAlive())
         {
             return;
         }
@@ -146,7 +146,7 @@ public class Zombie : MonoBehaviour {
 	//	}
 	private void OnTriggerStay2D(Collider2D other){
 
-		if (other.GetComponent<car> () != null) {
+		if (other.GetComponent<Car> () != null) {
 			isCarFound = true;
 			//			print ("stay");
 			targetX = other.transform.position.x;
@@ -157,7 +157,7 @@ public class Zombie : MonoBehaviour {
 	}
 	private void OnTriggerExit2D(Collider2D other){
 
-		if (other.GetComponent<car> () != null) {
+		if (other.GetComponent<Car> () != null) {
 			isCarFound = false;
 			//			print ("exit");
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class GrassLand : MonoBehaviour {
 
 
-	private car carone;
+	private Car carone;
 
 
 	// Use this for initialization

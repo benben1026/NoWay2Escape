@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class car : MonoBehaviour {
+public class Car : MonoBehaviour {
     public float turningAngle;
     public const int ACCELERATE_TIME = 30;
 	public const float VELOCITY = 4f;
     public int accelerateTimeLeft;
     public float velocity ;
-	public static car instance;
+	public static Car instance;
 
     private Rigidbody2D rigi;
     private Vector2 previousVelocity;
@@ -72,7 +72,6 @@ public class car : MonoBehaviour {
     
     // Update is called once per frame
     void FixedUpdate () {
-		print (this.rigi.velocity.magnitude);
 		if (this.alive == false)
 			return;
         float move = Input.GetAxis("Horizontal");
@@ -120,8 +119,14 @@ public class car : MonoBehaviour {
     }
 
 	private void OnTriggerEnter2D(Collider2D other){
+        if (other.GetComponent<DestinationFlag>() != null)
+        {
+            print("win");
+            this.alive = false;
+            this.rigi.velocity = Vector2.zero;
+            GameController.instance.gameWin();
+        }
 		if (other.GetComponent<GrassLand> () != null) {
-
 			this.updateVeclocity (0.5f);
 		}
 	}
