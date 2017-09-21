@@ -86,70 +86,70 @@ public class MapManager : MonoBehaviour
 
         
 
-		int grassLandCount = Random.Range (0, grassLandCountMax);
-
-
-		for (int glc = 0; glc < grassLandCount; glc++) {
-			int grassColCount = Random.Range(grassMin, grassMax+1);
-			int grassRowCount = Random.Range (grassMin, grassMax+1);
-			
-			int positionIndex = Random.Range(0, positionList.Count);
-			Vector2 pos = positionList[positionIndex];
-
-			grassPositionList.Add(new Grasslocation(pos,grassColCount,grassRowCount));
-
-
-
-			for (int i = 0; i < grassColCount; i++) {
-				for (int j = 0; j < grassRowCount; j++) {
-
-
-					float x = pos.x + i;
-					float y = pos.y + j;
-
-					if (x < col-1 && y < row-1) {
-						positionList.Remove(new Vector2(x, y));
-						int grassIndex = Random.Range(0, grassArray.Length);
-						GameObject go = GameObject.Instantiate(grassArray[grassIndex], 0.65f * new Vector2(x, y), Quaternion.identity);
-						go.transform.SetParent(mapholder);
-
-					}
-
-
-
-
-				}
-
-			}
-
-
-		}
+//		int grassLandCount = Random.Range (0, grassLandCountMax);
+//
+//
+//		for (int glc = 0; glc < grassLandCount; glc++) {
+//			int grassColCount = Random.Range(grassMin, grassMax+1);
+//			int grassRowCount = Random.Range (grassMin, grassMax+1);
+//			
+//			int positionIndex = Random.Range(0, positionList.Count);
+//			Vector2 pos = positionList[positionIndex];
+//
+//			grassPositionList.Add(new Grasslocation(pos,grassColCount,grassRowCount));
+//
+//
+//
+//			for (int i = 0; i < grassColCount; i++) {
+//				for (int j = 0; j < grassRowCount; j++) {
+//
+//
+//					float x = pos.x + i;
+//					float y = pos.y + j;
+//
+//					if (x < col-1 && y < row-1) {
+//						positionList.Remove(new Vector2(x, y));
+//						int grassIndex = Random.Range(0, grassArray.Length);
+//						GameObject go = GameObject.Instantiate(grassArray[grassIndex], 0.65f * new Vector2(x, y), Quaternion.identity);
+//						go.transform.SetParent(mapholder);
+//
+//					}
+//
+//
+//
+//
+//				}
+//
+//			}
+//
+//
+//		}
 
     }
 
-	public static bool  check(Vector2 pos) {
-		bool YN = false;
-		for (int i = 0; i < grassPositionList.Count; i++) {
-			Grasslocation gloction = grassPositionList [i];
-
-			Vector2 gpos = gloction.posGrass;
-			Vector2 dpos = new Vector2 (gpos.x + gloction.posGrasscol - 1, gpos.y + gloction.posGrassrow - 1);
-
-
-			if (pos.x>=gpos.x && pos.x<=dpos.x && pos.y>=gpos.y && pos.y<=dpos.y)
-					{
-						YN=true;
-						goto end;
-
-					}
-				
-			
-
-
-
-		}
-
-		end:return YN;
-
-	}
+//	public static bool  check(Vector2 pos) {
+//		bool YN = false;
+//		for (int i = 0; i < grassPositionList.Count; i++) {
+//			Grasslocation gloction = grassPositionList [i];
+//
+//			Vector2 gpos = gloction.posGrass;
+//			Vector2 dpos = new Vector2 (gpos.x + gloction.posGrasscol - 1, gpos.y + gloction.posGrassrow - 1);
+//
+//
+//			if (pos.x>=gpos.x && pos.x<=dpos.x && pos.y>=gpos.y && pos.y<=dpos.y)
+//					{
+//						YN=true;
+//						goto end;
+//
+//					}
+//				
+//			
+//
+//
+//
+//		}
+//
+//		end:return YN;
+//
+//	}
 }
