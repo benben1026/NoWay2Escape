@@ -7,7 +7,9 @@ public class Camera : MonoBehaviour {
 
 	private Vector3 offset;
 	void Start () {
-		offset = transform.position - car.transform.position;
+//		transform.position = car.transform.position + new Vector3 (0, 0, -15);
+//		offset = transform.position - car.transform.position;
+		offset = new Vector3 (0, 0, -15);
 	}
 
 	// Update is called once per frame
