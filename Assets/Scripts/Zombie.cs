@@ -22,7 +22,7 @@ public class Zombie : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		constantV = 1.6f;
+		constantV = 3f;
 		this.rigi.velocity = new Vector2(0f, constantV);
 		this.turningAngle = 0.02f; // Radian
 
@@ -39,9 +39,9 @@ public class Zombie : MonoBehaviour {
 	void FixedUpdate () {
 		if (this.rigi.velocity.magnitude < constantV) {
 			this.rigi.velocity = new Vector2(0f, constantV);
-			transform.Rotate(0, 0, 30 / Mathf.PI);
+			//			transform.Rotate(0, 0, 30 / Mathf.PI);
 		}
-			
+
 
 
 		if (isCarFound) {
@@ -68,23 +68,23 @@ public class Zombie : MonoBehaviour {
 		float alphy = currV.y;
 		float thy = (targetX - selfX) * alphy / alphx + selfY;
 
-//		if (thy < targetY) {
-//			if (alphx > 0)
-////				this.transform.Rotate (0, 0, (-1) * angle * 180 / Mathf.PI);
-//				this.transform.Rotate (0, 0, angle * 180 / Mathf.PI);
-//			else if (alphx < 0)
-////				this.transform.Rotate (0, 0, angle * 180 / Mathf.PI);
-//				this.transform.Rotate (0, 0, (-1) * angle * 180 / Mathf.PI);
-//		} else if (thy > targetY) {
-//			if (alphx > 0)
-////				this.transform.Rotate (0, 0, angle * 180 / Mathf.PI);
-//				this.transform.Rotate (0, 0, (-1) * angle * 180 / Mathf.PI);
-//			else if (alphx < 0)
-////				this.transform.Rotate (0, 0, (-1) * angle * 180 / Mathf.PI);
-//				this.transform.Rotate (0, 0, angle * 180 / Mathf.PI);
-//		}
+		//		if (thy < targetY) {
+		//			if (alphx > 0)
+		////				this.transform.Rotate (0, 0, (-1) * angle * 180 / Mathf.PI);
+		//				this.transform.Rotate (0, 0, angle * 180 / Mathf.PI);
+		//			else if (alphx < 0)
+		////				this.transform.Rotate (0, 0, angle * 180 / Mathf.PI);
+		//				this.transform.Rotate (0, 0, (-1) * angle * 180 / Mathf.PI);
+		//		} else if (thy > targetY) {
+		//			if (alphx > 0)
+		////				this.transform.Rotate (0, 0, angle * 180 / Mathf.PI);
+		//				this.transform.Rotate (0, 0, (-1) * angle * 180 / Mathf.PI);
+		//			else if (alphx < 0)
+		////				this.transform.Rotate (0, 0, (-1) * angle * 180 / Mathf.PI);
+		//				this.transform.Rotate (0, 0, angle * 180 / Mathf.PI);
+		//		}
 
-		this.transform.Rotate (dir.x * Time.deltaTime, dir.y * Time.deltaTime, 0, Space.Self);
+		//		this.transform.Rotate (dir.x * Time.deltaTime, dir.y * Time.deltaTime, 0, Space.Self);
 
 		float x = this.rigi.velocity.x;
 		float y = this.rigi.velocity.y;
@@ -114,7 +114,7 @@ public class Zombie : MonoBehaviour {
 			float y = this.rigi.velocity.y;
 			float angle = this.turningAngle;
 			this.rigi.velocity = new Vector2(x * Mathf.Cos(angle) + y * Mathf.Sin(angle), (-1) * x * Mathf.Sin(angle) + y * Mathf.Cos(angle));
-			transform.Rotate(0, 0, (-1) * angle * 180 / Mathf.PI);
+			//			transform.Rotate(0, 0, (-1) * angle * 180 / Mathf.PI);
 		}
 		else if (move == -1)
 		{
@@ -122,24 +122,24 @@ public class Zombie : MonoBehaviour {
 			float y = this.rigi.velocity.y;
 			float angle = (-1) * this.turningAngle;
 			this.rigi.velocity = new Vector2(x * Mathf.Cos(angle) + y * Mathf.Sin(angle), (-1) * x * Mathf.Sin(angle) + y * Mathf.Cos(angle));
-			transform.Rotate(0, 0, (-1) * angle * 180 / Mathf.PI);
+			//			transform.Rotate(0, 0, (-1) * angle * 180 / Mathf.PI);
 		}
 
 	}
 	void randomDir (){
 		currentDir = rnd.Next (-1, 2);
 	}
-	private void OnTriggerEnter2D(Collider2D other){
-
-		if (other.GetComponent<car> () != null) {
-			isCarFound = true;
-			//			print ("found");
-			targetX = other.transform.position.x;
-			targetY = other.transform.position.y;
-			//			print (targetX);
-			//			print (targetY);
-		}
-	}
+	//	private void OnTriggerEnter2D(Collider2D other){
+	//
+	//		if (other.GetComponent<car> () != null) {
+	//			isCarFound = true;
+	//			//			print ("found");
+	//			targetX = other.transform.position.x;
+	//			targetY = other.transform.position.y;
+	//			//			print (targetX);
+	//			//			print (targetY);
+	//		}
+	//	}
 	private void OnTriggerStay2D(Collider2D other){
 
 		if (other.GetComponent<car> () != null) {
