@@ -53,6 +53,10 @@ public class Zombie : MonoBehaviour {
 		}
 	}
 	void chasing(){
+        if (!car.instance.isAlive())
+        {
+            return;
+        }
 		//		Turningcount++;
 		//		if (Turningcount == 40) {
 		//			Turningcount = 0;
