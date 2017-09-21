@@ -32,3 +32,7 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+.DS_Store
+/Assets/.DS_Store
+/ProjectSettings/.DS_Store
