@@ -102,14 +102,16 @@ public class car : MonoBehaviour {
 
         if (Input.GetKeyDown ("a") && !this.accelerateFlag && this.accelerateTimeLeft > 0) {
             this.accelerateFlag = true;
-            this.rigi.velocity = 8 * this.rigi.velocity;
+            //this.rigi.velocity = 8 * this.rigi.velocity;
+			this.updateVeclocity (5f);
             this.accelerateTimeLeft--;
         } else if (this.accelerateFlag && this.accelerateCountdown > 0) {
             this.accelerateCountdown--;
         } else if (this.accelerateFlag) {
             this.accelerateFlag = false;
             this.accelerateCountdown = ACCELERATE_TIME;
-            this.rigi.velocity = this.rigi.velocity / 8;
+            //this.rigi.velocity = this.rigi.velocity / 8;
+			this.updateVeclocity(0.2f);
         }
         
     }
