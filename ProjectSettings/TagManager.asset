@@ -49,6 +49,9 @@ TagManager:
   - name: grass
     uniqueID: 2437334657
     locked: 0
+  - name: plane
+    uniqueID: 34867597
+    locked: 0
   - name: player
     uniqueID: 220414221
     locked: 0

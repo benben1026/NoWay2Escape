@@ -62,12 +62,12 @@ public class MapManager : MonoBehaviour
                     map.transform.SetParent(mapholder);
 
                 }
-                else {
-                    int index = Random.Range(0, landArray.Length);
-                    GameObject map = Instantiate(landArray[index], new Vector3(0.65f * i, 0.65f * j, 0f), Quaternion.identity) as GameObject;
-                    map.transform.SetParent(mapholder);
+                //else {
+                //    int index = Random.Range(0, landArray.Length);
+                //    GameObject map = Instantiate(landArray[index], new Vector3(0.65f * i, 0.65f * j, 0f), Quaternion.identity) as GameObject;
+                //    map.transform.SetParent(mapholder);
 
-                }
+                //}
                
 
 
