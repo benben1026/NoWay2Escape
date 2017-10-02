@@ -57,9 +57,9 @@ public class MapManager : MonoBehaviour
 
                 if (i == 0 || j == 0 || i == col - 1 || j == row - 1)
                 {
-                    int index = Random.Range(0, wallArray.Length);
-                    GameObject map = Instantiate(wallArray[index], new Vector3(0.65f * i, 0.65f * j, 0f), Quaternion.identity) as GameObject;
-                    map.transform.SetParent(mapholder);
+                    //int index = Random.Range(0, wallArray.Length);
+                    //GameObject map = Instantiate(wallArray[index], new Vector3(0.65f * i, 0.65f * j, 0f), Quaternion.identity) as GameObject;
+                    //map.transform.SetParent(mapholder);
 
                 }
                 //else {
