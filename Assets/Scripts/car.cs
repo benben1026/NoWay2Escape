@@ -159,7 +159,8 @@ public class Car : MonoBehaviour {
 	}
 
 	private void OnTriggerStay2D(Collider2D other){
-		if (other.GetComponent<Zombie> () != null) {
+//		print("into collider");
+		if (other.GetComponent<Zombie> () != null || other.GetComponent<helmetZombie> () != null) {
 			float targetX = other.transform.position.x;
 			float targetY = other.transform.position.y;
 			float carX = this.transform.position.x;
@@ -173,7 +174,14 @@ public class Car : MonoBehaviour {
 				GameController.instance.gameOver ();
 			}
 
+		} 
+		if (other.GetComponent<ExplisonFire> () != null) {
+			this.rigi.velocity = Vector2.zero;
+			this.alive = false;
+			GameController.instance.gameOver ();
+
 		}
+			
 	}
 
 }

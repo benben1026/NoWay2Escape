@@ -1,7 +1,9 @@
-﻿using System; 
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using System; 
 
-public class Zombie : MonoBehaviour {
+public class explosionZombie : MonoBehaviour {
 	public float turningAngle;
 	private Rigidbody2D rigi;
 	private int timeToChangeDir;
@@ -14,6 +16,11 @@ public class Zombie : MonoBehaviour {
 	public float targetX;
 	public float targetY;
 	public float constantV;
+	private int chasingCount;
+	public int explosionCount;
+	private Vector2 chasingVelocity;
+	public GameObject expPrefab;
+
 
 	private void Awake()
 	{
@@ -22,8 +29,11 @@ public class Zombie : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		chasingCount = 80;
+
 		constantV = 3f;
 		this.rigi.velocity = new Vector2(0f, constantV);
+		chasingVelocity = new Vector2 (0f, 2 * constantV);
 		this.turningAngle = 0.02f; // Radian
 
 		rnd = new System.Random(Guid.NewGuid().GetHashCode());
@@ -45,18 +55,36 @@ public class Zombie : MonoBehaviour {
 
 
 		if (isCarFound) {
+//			this.rigi.velocity = chasingVelocity;
 			chasing ();
+			if (chasingCount > 0) {
+				
+				chasingCount--;
+			} else {
+//				print ("explosion");
+				this.rigi.velocity = Vector2.zero;
+				explosion ();
+
+
+			}
+
 			//			print ("carfound");
 		} else {
 			randomMove ();
 			//			print ("carnofound");
 		}
 	}
+	void explosion(){
+		this.rigi.velocity = Vector2.zero;
+		print("show explosion");
+		Instantiate (expPrefab, new Vector2 (this.transform.position.x, this.transform.position.y), Quaternion.identity);
+		Destroy (this.gameObject);
+	}
 	void chasing(){
-        if (!Car.instance.isAlive())
-        {
-            return;
-        }
+		if (!Car.instance.isAlive())
+		{
+			return;
+		}
 		//		Turningcount++;
 		//		if (Turningcount == 40) {
 		//			Turningcount = 0;
@@ -72,26 +100,8 @@ public class Zombie : MonoBehaviour {
 		float alphy = currV.y;
 		float thy = (targetX - selfX) * alphy / alphx + selfY;
 
-		//		if (thy < targetY) {
-		//			if (alphx > 0)
-		////				this.transform.Rotate (0, 0, (-1) * angle * 180 / Mathf.PI);
-		//				this.transform.Rotate (0, 0, angle * 180 / Mathf.PI);
-		//			else if (alphx < 0)
-		////				this.transform.Rotate (0, 0, angle * 180 / Mathf.PI);
-		//				this.transform.Rotate (0, 0, (-1) * angle * 180 / Mathf.PI);
-		//		} else if (thy > targetY) {
-		//			if (alphx > 0)
-		////				this.transform.Rotate (0, 0, angle * 180 / Mathf.PI);
-		//				this.transform.Rotate (0, 0, (-1) * angle * 180 / Mathf.PI);
-		//			else if (alphx < 0)
-		////				this.transform.Rotate (0, 0, (-1) * angle * 180 / Mathf.PI);
-		//				this.transform.Rotate (0, 0, angle * 180 / Mathf.PI);
-		//		}
-
-		//		this.transform.Rotate (dir.x * Time.deltaTime, dir.y * Time.deltaTime, 0, Space.Self);
-
-		float x = this.rigi.velocity.x;
-		float y = this.rigi.velocity.y;
+		float x = this.rigi.velocity.x * chasingVelocity.magnitude/this.rigi.velocity.magnitude;
+		float y = this.rigi.velocity.y * chasingVelocity.magnitude/this.rigi.velocity.magnitude;
 		this.rigi.velocity = new Vector2(x * Mathf.Cos(angle) + y * Mathf.Sin(angle), (-1) * x * Mathf.Sin(angle) + y * Mathf.Cos(angle));
 		//this.rigi.velocity = Vector2.zero;
 	}
@@ -153,19 +163,6 @@ public class Zombie : MonoBehaviour {
 			targetY = other.transform.position.y;
 			//			print (targetX);
 			//			print (targetY);
-		}
-		if (other.GetComponent<ExplisonFire> () != null) {
-			float targetX = other.transform.position.x;
-			float targetY = other.transform.position.y;
-			float carX = this.transform.position.x;
-			float carY = this.transform.position.y;
-			float dx = carX - targetX;
-			float dy = carY - targetY;
-			if (dx * dx + dy * dy < 16) {
-				Destroy (this.gameObject);
-			}
-
-
 		}
 	}
 	private void OnTriggerExit2D(Collider2D other){

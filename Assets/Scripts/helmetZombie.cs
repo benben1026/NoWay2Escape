@@ -1,7 +1,7 @@
 ﻿using System; 
 using UnityEngine;
 
-public class Zombie : MonoBehaviour {
+public class helmetZombie : MonoBehaviour {
 	public float turningAngle;
 	private Rigidbody2D rigi;
 	private int timeToChangeDir;
@@ -14,6 +14,7 @@ public class Zombie : MonoBehaviour {
 	public float targetX;
 	public float targetY;
 	public float constantV;
+	public bool ishurt;
 
 	private void Awake()
 	{
@@ -22,6 +23,7 @@ public class Zombie : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		ishurt = false;
 		constantV = 3f;
 		this.rigi.velocity = new Vector2(0f, constantV);
 		this.turningAngle = 0.02f; // Radian
@@ -53,10 +55,10 @@ public class Zombie : MonoBehaviour {
 		}
 	}
 	void chasing(){
-        if (!Car.instance.isAlive())
-        {
-            return;
-        }
+		if (!Car.instance.isAlive())
+		{
+			return;
+		}
 		//		Turningcount++;
 		//		if (Turningcount == 40) {
 		//			Turningcount = 0;
@@ -162,7 +164,12 @@ public class Zombie : MonoBehaviour {
 			float dx = carX - targetX;
 			float dy = carY - targetY;
 			if (dx * dx + dy * dy < 16) {
-				Destroy (this.gameObject);
+				if (ishurt == false) {
+					ishurt = true;
+				} else {
+					Destroy (this.gameObject);
+				}
+
 			}
 
 
