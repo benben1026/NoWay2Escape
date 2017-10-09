@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour {
     public Text gamePromptText;
     public Text countDownText;
 
+	private bool success;
     private int timeLeft;
     private float time;
     private int gameStatus;   // 0 -> ongoing; 1-> success; 2-> fail
@@ -25,10 +26,17 @@ public class GameController : MonoBehaviour {
         updateTime();
         time = 0.0f;
         gameStatus = 0;
+		success = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if (timeLeft <= 0){
+			timeLeft = 0;
+			updateTime ();
+			this.gameOver ();
+			return;
+		}
         time += Time.deltaTime;
 
         if (time > 1.0f)
@@ -42,13 +50,18 @@ public class GameController : MonoBehaviour {
         
 	}
 	public void gameOver(){
+		if (success) {
+			return;
+		}
         gameStatus = 2;
         gamePromptText.text = "Game Over";
         gamePromptText.enabled = true;
+		Car.instance.setCarDead ();
 	}
 
     public void gameWin()
     {
+		success = true;
         gameStatus = 1;
         gamePromptText.text = "Congratulations!";
         gamePromptText.enabled = true;

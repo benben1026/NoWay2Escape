@@ -69,12 +69,31 @@ public class Car : MonoBehaviour {
 	public bool isAlive(){
 		return this.alive;
 	}
+
+	public void setCarDead(){
+		this.rigi.velocity = Vector2.zero;
+		this.alive = false;
+	}
     
     // Update is called once per frame
     void FixedUpdate () {
 		if (this.alive == false)
 			return;
-        float move = Input.GetAxis("Horizontal");
+        //float move = Input.GetAxis("Horizontal");
+
+		int move = 0;
+		bool ifAcc = false;
+		if (Input.touchCount > 0 && Input.GetTouch (0).position.x <= Screen.width * 0.3) {
+			move = -1;
+		} else if (Input.touchCount > 0 && Input.GetTouch (0).position.x >= Screen.width * 0.7) {
+			move = 1;
+		} else if (Input.touchCount > 0 && Input.GetTouch (0).position.x > Screen.width * 0.35 && Input.GetTouch (0).position.x < Screen.width * 0.65) {
+			ifAcc = true;
+		}
+
+//		print ("ifAcc :" + ifAcc);
+//		print ("accelerateFlag: " + accelerateFlag);
+				
 
         if (move == 1 && this.engineFlag && !this.accelerateFlag)
         {
@@ -93,7 +112,7 @@ public class Car : MonoBehaviour {
             transform.Rotate(0, 0, (-1) * angle * 180 / Mathf.PI);
         }
 
-        if (Input.GetKeyDown ("s") && this.engineFlag && !this.accelerateFlag) {
+		if (Input.GetKeyDown ("s") && this.engineFlag && !this.accelerateFlag) {
             this.previousVelocity = this.rigi.velocity;
             this.rigi.velocity = new Vector2 (0, 0);
             this.engineFlag = !this.engineFlag;
@@ -102,18 +121,20 @@ public class Car : MonoBehaviour {
             this.engineFlag = !this.engineFlag;
         }
 
-        if (Input.GetKeyDown ("a") && !this.accelerateFlag && this.accelerateTimeLeft > 0) {
+		print ("accFlag = " + accelerateFlag);
+		if (ifAcc && !this.accelerateFlag && this.accelerateTimeLeft > 0) {
             this.accelerateFlag = true;
-            //this.rigi.velocity = 8 * this.rigi.velocity;
 			this.updateVeclocity (5f);
             this.accelerateTimeLeft--;
+			print ("first");
         } else if (this.accelerateFlag && this.accelerateCountdown > 0) {
             this.accelerateCountdown--;
+			print (this.accelerateCountdown);
         } else if (this.accelerateFlag) {
             this.accelerateFlag = false;
             this.accelerateCountdown = ACCELERATE_TIME;
-            //this.rigi.velocity = this.rigi.velocity / 8;
 			this.updateVeclocity(0.2f);
+			print ("third");
         }
         
     }
@@ -146,8 +167,9 @@ public class Car : MonoBehaviour {
 			float dx = carX - targetX;
 			float dy = carY - targetY;
 			if (dx * dx + dy * dy < 1) {
-				this.rigi.velocity = Vector2.zero;
-				this.alive = false;
+				//this.stopCar ();
+//				this.rigi.velocity = Vector2.zero;
+//				this.alive = false;
 				GameController.instance.gameOver ();
 			}
 
