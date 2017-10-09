@@ -126,15 +126,12 @@ public class Car : MonoBehaviour {
             this.accelerateFlag = true;
 			this.updateVeclocity (5f);
             this.accelerateTimeLeft--;
-			print ("first");
         } else if (this.accelerateFlag && this.accelerateCountdown > 0) {
             this.accelerateCountdown--;
-			print (this.accelerateCountdown);
         } else if (this.accelerateFlag) {
             this.accelerateFlag = false;
             this.accelerateCountdown = ACCELERATE_TIME;
 			this.updateVeclocity(0.2f);
-			print ("third");
         }
         
     }
