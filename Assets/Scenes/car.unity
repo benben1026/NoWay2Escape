@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 270af1a1f55094deea83a602815d7255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zombiePoolSize: 5
+  zombiePoolSize: 10
   spawnRate: 4
   zombiePrefab: {fileID: 1884728764065848, guid: 4121c76a109b34956be4d8f3297fc691,
     type: 2}
@@ -797,7 +797,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 1
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -1.31, y: -1.87}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -806,9 +806,9 @@ BoxCollider2D:
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_AutoTiling: 1
   serializedVersion: 2
-  m_Size: {x: 4.22, y: 4.56}
+  m_Size: {x: 2.06, y: 1.4}
   m_EdgeRadius: 0
 --- !u!1 &1597363183 stripped
 GameObject:
@@ -964,6 +964,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1884728764065848, guid: 4121c76a109b34956be4d8f3297fc691, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4121c76a109b34956be4d8f3297fc691, type: 2}
   m_IsPrefabParent: 0
@@ -999,7 +1003,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turningAngle: 0
   accelerateTimeLeft: 0
-  velocity: 10
+  velocity: 0
 --- !u!50 &1991572259
 Rigidbody2D:
   serializedVersion: 4
