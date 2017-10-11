@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Grass
   - wall
+  - LevelChanger
+  - LargeTile
   layers:
   - Default
   - TransparentFX
@@ -43,11 +45,11 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: background
-    uniqueID: 2312604723
-    locked: 0
   - name: grass
     uniqueID: 2437334657
+    locked: 0
+  - name: tree
+    uniqueID: 1305988847
     locked: 0
   - name: player
     uniqueID: 220414221

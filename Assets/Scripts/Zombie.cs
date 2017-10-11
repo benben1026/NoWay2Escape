@@ -22,7 +22,7 @@ public class Zombie : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		constantV = 3f;
+		constantV = 2f;
 		this.rigi.velocity = new Vector2(0f, constantV);
 		this.turningAngle = 0.02f; // Radian
 

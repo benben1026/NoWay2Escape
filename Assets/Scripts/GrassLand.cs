@@ -19,32 +19,32 @@ public class GrassLand : MonoBehaviour {
 		
 	}
 
-//	private void OnTriggerEnter2D(Collider2D other){
-//		
-//		if (other.GetComponent<car> () != null) {
-//			
-//			car.instance.updateVeclocity (0.5f);
-//
-//
-//
-//		}
-//	}
-//	private void OnTriggerStay2D(Collider2D other){
-//		
-//		if (other.GetComponent<car> () != null) {
-//			
-//			car.instance.updateVeclocity (1f);
-//
-//		
-//		}
-//	}
-//	private void OnTriggerExit2D(Collider2D other){
-//
-//		if (other.GetComponent<car> () != null) {
-//			
-//			car.instance.updateVeclocity (2f);
-//			print ("car out grass");
-//
-//		}
-//	}
+private void OnTriggerEnter2D(Collider2D other){
+	
+	if (other.GetComponent<Car> () != null) {
+		
+		Car.instance.updateVeclocity (0.5f);
+
+
+
+	}
+}
+private void OnTriggerStay2D(Collider2D other){
+	
+	if (other.GetComponent<Car> () != null) {
+		
+		Car.instance.updateVeclocity (1f);
+
+	
+	}
+}
+private void OnTriggerExit2D(Collider2D other){
+
+	if (other.GetComponent<Car> () != null) {
+		
+		Car.instance.updateVeclocity (2f);
+		
+
+	}
+}
 }

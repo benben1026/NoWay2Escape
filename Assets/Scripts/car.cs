@@ -5,7 +5,7 @@ using UnityEngine;
 public class Car : MonoBehaviour {
     public float turningAngle;
     public const int ACCELERATE_TIME = 30;
-	public const float VELOCITY = 4f;
+	public const float VELOCITY = 2f;
     public int accelerateTimeLeft;
     public float velocity ;
 	public static Car instance;
@@ -126,16 +126,16 @@ public class Car : MonoBehaviour {
             this.rigi.velocity = Vector2.zero;
             GameController.instance.gameWin();
         }
-		if (other.GetComponent<GrassLand> () != null) {
-			this.updateVeclocity (0.5f);
-		}
+		// if (other.GetComponent<GrassLand> () != null) {
+// 			this.updateVeclocity (0.5f);
+// 		}
 	}
 
-	private void OnTriggerExit2D(Collider2D other){
-		if (other.GetComponent<GrassLand> () != null) {
-			this.updateVeclocity (2f);
-		}
-	}
+//  	private void OnTriggerExit2D(Collider2D other){
+//  		if (other.GetComponent<GrassLand> () != null) {
+// 			this.updateVeclocity (2f);
+//		}
+// 	}
 
 	private void OnTriggerStay2D(Collider2D other){
 		if (other.GetComponent<Zombie> () != null) {
