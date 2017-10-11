@@ -53,7 +53,7 @@ public class Zombie : MonoBehaviour {
 		}
 	}
 	void chasing(){
-        if (!Car.instance.isAlive())
+        if (Car.instance.GetCarStatus() == Car.CarStatusType.Die || Car.instance.GetCarStatus() == Car.CarStatusType.Win)
         {
             return;
         }

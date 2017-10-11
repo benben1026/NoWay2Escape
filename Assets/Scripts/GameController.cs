@@ -56,7 +56,7 @@ public class GameController : MonoBehaviour {
         gameStatus = 2;
         gamePromptText.text = "Game Over";
         gamePromptText.enabled = true;
-		Car.instance.setCarDead ();
+        Car.instance.SetCarStatus(Car.CarStatusType.Die);
 	}
 
     public void gameWin()
@@ -65,6 +65,7 @@ public class GameController : MonoBehaviour {
         gameStatus = 1;
         gamePromptText.text = "Congratulations!";
         gamePromptText.enabled = true;
+        Car.instance.SetCarStatus(Car.CarStatusType.Win);
     }
 
     private void updateTime()
