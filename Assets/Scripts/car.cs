@@ -28,6 +28,7 @@ public class Car : MonoBehaviour {
     private enum VelocityValue { }
     private CarStatusType carStatus;
     private LandType landType;
+    private bool ifInit;
     
     
     private void Awake()
@@ -44,9 +45,15 @@ public class Car : MonoBehaviour {
     void Start () {
         this.accelerateCountdown = CarConstant.AccNoOfFrames;
         this.accelerateTimeLeft = CarConstant.BaseAccTimes;
-        this.rigi.velocity = new Vector2(0f, CarConstant.BaseVelocity);
+        this.rigi.velocity = Vector2.zero;
+        this.ifInit = false;
         carStatus = CarStatusType.Normal;
         landType = LandType.Road;
+    }
+
+    private void Init()
+    {
+        this.rigi.velocity = new Vector2(0f, CarConstant.BaseVelocity);
     }
 
     public CarStatusType GetCarStatus()
@@ -84,15 +91,26 @@ public class Car : MonoBehaviour {
 	}
     
     // Update is called once per frame
-    void FixedUpdate () {
+    void FixedUpdate ()
+    {
+
         if (this.carStatus == CarStatusType.Win || this.carStatus == CarStatusType.Die)
         {
             this.rigi.velocity = Vector2.zero;
             return;
         }
+        if (GameController.instance.GetGameStatus() != GameController.GameStatus.start)
+        {
+            return;
+        }
+        if (!ifInit)
+        {
+            Init();
+            ifInit = true;
+        }
 
         float move = Input.GetAxis("Horizontal");
-        bool ifAcc = Input.GetKeyDown("a");
+        bool ifAcc = Input.GetKeyDown("q");
         if (Input.touchCount > 0 && Input.GetTouch(0).position.x <= Screen.width * 0.3)
         {
             move = -1;
