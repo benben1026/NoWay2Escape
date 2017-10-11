@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour {
 	public GameObject car;
+    public int height;
 
 	private Vector3 offset;
 	void Start () {
-//		transform.position = car.transform.position + new Vector3 (0, 0, -15);
-//		offset = transform.position - car.transform.position;
-		offset = new Vector3 (0, 0, -15);
+		offset = new Vector3 (0, 0, height);
 	}
 
 	// Update is called once per frame

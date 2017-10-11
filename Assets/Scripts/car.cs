@@ -4,15 +4,15 @@ using UnityEngine;
 
 class CarConstant
 {
-    public static float BaseVelocity = 4f;
+    public static float BaseVelocity = 1f;
 
     public static float OnGrassDeaccScale = 0.5f;
 
-    public static float AccScale = 5f;
+    public static float AccScale = 3f;
 
     public static int AccNoOfFrames = 30;
 
-    public static float TurningAngle = 0.02f; // Radian
+    public static float TurningAngle = 0.03f; // Radian
 
     public static int BaseAccTimes = 3;
 }
@@ -148,16 +148,7 @@ public class Car : MonoBehaviour {
         {
             GameController.instance.gameWin();
         }
-		//if (other.GetComponent<GrassLand> () != null) {
-		//	this.updateVeclocity (0.5f);
-		//}
 	}
-
-	//private void OnTriggerExit2D(Collider2D other){
-	//	if (other.GetComponent<GrassLand> () != null) {
-	//		this.updateVeclocity (2f);
-	//	}
-	//}
 
 	private void OnTriggerStay2D(Collider2D other){
 		if (other.GetComponent<Zombie> () != null) {
@@ -168,9 +159,6 @@ public class Car : MonoBehaviour {
 			float dx = carX - targetX;
 			float dy = carY - targetY;
 			if (dx * dx + dy * dy < 1) {
-				//this.stopCar ();
-//				this.rigi.velocity = Vector2.zero;
-//				this.alive = false;
 				GameController.instance.gameOver ();
 			}
 
