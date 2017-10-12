@@ -20,12 +20,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4671151644391664}
   - component: {fileID: 212239630937268430}
-  - component: {fileID: 114214442592143486}
   - component: {fileID: 50485754911132172}
   - component: {fileID: 58565742139435040}
   - component: {fileID: 61057101815831768}
   - component: {fileID: 95547972750441548}
-  - component: {fileID: 114481069146944136}
+  - component: {fileID: 114894351110386364}
   m_Layer: 0
   m_Name: helmetZombie
   m_TagString: Untagged
@@ -41,7 +40,7 @@ Transform:
   m_GameObject: {fileID: 1828445075043470}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 41.5, y: 7.9, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.07, y: 0.07, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -123,7 +122,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114214442592143486
+--- !u!114 &114894351110386364
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -131,24 +130,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1828445075043470}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ca83c481a5d448fcbc0d99fdd112961, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turningAngle: 0
-  threadHold: 5
-  isCarFound: 0
-  targetX: 0
-  targetY: 0
-  constantV: 0
---- !u!114 &114481069146944136
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1828445075043470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2120a755c00ea4244a7c5da84613314c, type: 3}
+  m_Script: {fileID: 11500000, guid: e70f20ff5a07f49b393a51c2e5126938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   turningAngle: 0
@@ -158,6 +140,8 @@ MonoBehaviour:
   targetY: 0
   constantV: 0
   ishurt: 0
+  zombiePrefab: {fileID: 1251267758562548, guid: dfc2f87d6d3e2409abd8dd1856d55f14,
+    type: 2}
 --- !u!212 &212239630937268430
 SpriteRenderer:
   m_ObjectHideFlags: 1

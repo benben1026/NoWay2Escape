@@ -5,7 +5,7 @@ using UnityEngine;
 public class ZombiePool : MonoBehaviour {
 
 	public static ZombiePool SharedInstance;
-	
+
 	public int zombiePoolSize = 5;
 	public float spawnRate = 4f;
 	private GameObject[] zombies;
@@ -18,8 +18,8 @@ public class ZombiePool : MonoBehaviour {
 
 	public int threadHold = 5;
 	private Vector2 objectPoolPosition;
-	private int startedge = 20;
-	private int endedge = 60;
+	private int startedge = 0;
+	private int endedge = 15;
 
 
 	public List<GameObject> pooledObjects;
@@ -51,15 +51,15 @@ public class ZombiePool : MonoBehaviour {
 
 		}
 
-	// Update is called once per frame
-	
+		// Update is called once per frame
+
 	}
-//	public GameObject GetPooledObject(){
-//		for (int i = 0; i < pooledObjects.Count; i++) {
-//			if (!pooledObjects [i].activeInHierarchy) {
-//				return pooledObjects [i];
-//			}
-//		}
-//		return null;
-//	}
+	//	public GameObject GetPooledObject(){
+	//		for (int i = 0; i < pooledObjects.Count; i++) {
+	//			if (!pooledObjects [i].activeInHierarchy) {
+	//				return pooledObjects [i];
+	//			}
+	//		}
+	//		return null;
+	//	}
 }

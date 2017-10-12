@@ -2,21 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+class CarConstant
+{
+    public static float BaseVelocity = 1f;
+
+    public static float OnGrassDeaccScale = 0.5f;
+
+    public static float AccScale = 3f;
+
+    public static int AccNoOfFrames = 30;
+
+    public static float TurningAngle = 0.03f; // Radian
+
+    public static int BaseAccTimes = 3;
+}
+
 public class Car : MonoBehaviour {
-    public float turningAngle;
-    public const int ACCELERATE_TIME = 30;
-	public const float VELOCITY = 4f;
     public int accelerateTimeLeft;
-    public float velocity ;
 	public static Car instance;
+    public enum CarStatusType { Normal, Accelerate, Die, Win };
+    public enum LandType { Grass, Road };
 
     private Rigidbody2D rigi;
-    private Vector2 previousVelocity;
-    private bool engineFlag;
-    private bool accelerateFlag;
     private int accelerateCountdown;
-	private bool alive;
-	private bool grassFlag;
+    private enum VelocityValue { }
+    private CarStatusType carStatus;
+    private LandType landType;
+    private bool ifInit;
+    
     
     private void Awake()
     {
@@ -30,111 +43,120 @@ public class Car : MonoBehaviour {
     
     // Use this for initialization
     void Start () {
-		this.rigi.velocity = new Vector2(0f, VELOCITY);
-        this.previousVelocity = this.rigi.velocity;
-        this.turningAngle = 0.02f; // Radian
-        this.engineFlag = true;
-        this.accelerateFlag = false;
-        this.accelerateCountdown = ACCELERATE_TIME;
-        this.accelerateTimeLeft = 3;
-		this.alive = true;
-		this.grassFlag = false;
+        this.accelerateCountdown = CarConstant.AccNoOfFrames;
+        this.accelerateTimeLeft = CarConstant.BaseAccTimes;
+        this.rigi.velocity = Vector2.zero;
+        this.ifInit = false;
+        carStatus = CarStatusType.Normal;
+        landType = LandType.Road;
     }
 
-	public void updateVeclocity(float scale){
-		if (scale <= 0){
-			return;
-		}
-		if (this.rigi.velocity.magnitude == 0) {
-			return;
-		}
-		this.rigi.velocity = this.rigi.velocity * scale;
-	}
+    private void Init()
+    {
+        this.rigi.velocity = new Vector2(0f, CarConstant.BaseVelocity);
+    }
 
-	public Vector2 getVelocity(){
-		return this.rigi.velocity;
-	}
+    public CarStatusType GetCarStatus()
+    {
+        return this.carStatus;
+    }
 
-	public Vector2 getPosition(){
+    public void SetCarStatus(CarStatusType t)
+    {
+        this.carStatus = t;
+    }
+
+    public LandType GetLandType()
+    {
+        return this.landType;
+    }
+
+    public void SetLandType(LandType t)
+    {
+        if (this.landType == t){ return; }
+        if (t == LandType.Grass)
+        {
+            this.rigi.velocity = this.rigi.velocity * CarConstant.OnGrassDeaccScale;
+            this.landType = t;
+        }
+        else if(t == LandType.Road)
+        {
+            this.rigi.velocity = this.rigi.velocity / CarConstant.OnGrassDeaccScale;
+            this.landType = t;
+        }
+    }
+
+	public Vector2 GetPosition(){
 		return this.rigi.position;
-	}
-
-	public bool isMoving(){
-		if (this.rigi.velocity.magnitude == 0)
-			return false;
-		else
-			return true;
-	}
-
-	public bool isAlive(){
-		return this.alive;
-	}
-
-	public void setCarDead(){
-		this.rigi.velocity = Vector2.zero;
-		this.alive = false;
 	}
     
     // Update is called once per frame
-    void FixedUpdate () {
-		if (this.alive == false)
-			return;
-        //float move = Input.GetAxis("Horizontal");
+    void FixedUpdate ()
+    {
 
-		int move = 0;
-		bool ifAcc = false;
-		if (Input.touchCount > 0 && Input.GetTouch (0).position.x <= Screen.width * 0.3) {
-			move = -1;
-		} else if (Input.touchCount > 0 && Input.GetTouch (0).position.x >= Screen.width * 0.7) {
-			move = 1;
-		} else if (Input.touchCount > 0 && Input.GetTouch (0).position.x > Screen.width * 0.35 && Input.GetTouch (0).position.x < Screen.width * 0.65) {
-			ifAcc = true;
-		}
+        if (this.carStatus == CarStatusType.Win || this.carStatus == CarStatusType.Die)
+        {
+            this.rigi.velocity = Vector2.zero;
+            return;
+        }
+        if (GameController.instance.GetGameStatus() != GameController.GameStatus.start)
+        {
+            return;
+        }
+        if (!ifInit)
+        {
+            Init();
+            ifInit = true;
+        }
 
-//		print ("ifAcc :" + ifAcc);
-//		print ("accelerateFlag: " + accelerateFlag);
-				
+        float move = Input.GetAxis("Horizontal");
+        bool ifAcc = Input.GetKeyDown("q");
+        if (Input.touchCount > 0 && Input.GetTouch(0).position.x <= Screen.width * 0.3)
+        {
+            move = -1;
+        }
+        else if (Input.touchCount > 0 && Input.GetTouch(0).position.x >= Screen.width * 0.7)
+        {
+            move = 1;
+        }
+        else if (Input.touchCount > 0 && Input.GetTouch(0).position.x > Screen.width * 0.35 && Input.GetTouch(0).position.x < Screen.width * 0.65)
+        {
+            ifAcc = true;
+        }
 
-        if (move == 1 && this.engineFlag && !this.accelerateFlag)
+        if (move != 0)
         {
             float x = this.rigi.velocity.x;
             float y = this.rigi.velocity.y;
-            float angle = this.turningAngle;
+            float angle = move * CarConstant.TurningAngle;
             this.rigi.velocity = new Vector2(x * Mathf.Cos(angle) + y * Mathf.Sin(angle), (-1) * x * Mathf.Sin(angle) + y * Mathf.Cos(angle));
             transform.Rotate(0, 0, (-1) * angle * 180 / Mathf.PI);
         }
-        else if (move == -1 && this.engineFlag && !this.accelerateFlag)
+        
+        if (ifAcc && this.carStatus == CarStatusType.Normal && this.accelerateTimeLeft > 0)
         {
-            float x = this.rigi.velocity.x;
-            float y = this.rigi.velocity.y;
-            float angle = (-1) * this.turningAngle;
-            this.rigi.velocity = new Vector2(x * Mathf.Cos(angle) + y * Mathf.Sin(angle), (-1) * x * Mathf.Sin(angle) + y * Mathf.Cos(angle));
-            transform.Rotate(0, 0, (-1) * angle * 180 / Mathf.PI);
-        }
-
-		if (Input.GetKeyDown ("s") && this.engineFlag && !this.accelerateFlag) {
-            this.previousVelocity = this.rigi.velocity;
-            this.rigi.velocity = new Vector2 (0, 0);
-            this.engineFlag = !this.engineFlag;
-        } else if (Input.GetKeyDown ("s") && !this.accelerateFlag) {
-            this.rigi.velocity = this.previousVelocity;
-            this.engineFlag = !this.engineFlag;
-        }
-
-		print ("accFlag = " + accelerateFlag);
-		if (ifAcc && !this.accelerateFlag && this.accelerateTimeLeft > 0) {
-            this.accelerateFlag = true;
-			this.updateVeclocity (5f);
+            this.carStatus = CarStatusType.Accelerate;
+            this.rigi.velocity = CarConstant.AccScale * this.rigi.velocity;
             this.accelerateTimeLeft--;
-			print ("first");
-        } else if (this.accelerateFlag && this.accelerateCountdown > 0) {
+        }
+        else if(this.carStatus == CarStatusType.Accelerate && this.accelerateCountdown > 0)
+        {
             this.accelerateCountdown--;
-			print (this.accelerateCountdown);
-        } else if (this.accelerateFlag) {
-            this.accelerateFlag = false;
-            this.accelerateCountdown = ACCELERATE_TIME;
-			this.updateVeclocity(0.2f);
-			print ("third");
+        }
+        else if(this.carStatus == CarStatusType.Accelerate)
+        {
+            this.carStatus = CarStatusType.Normal;
+            this.rigi.velocity = this.rigi.velocity / CarConstant.AccScale;
+            this.accelerateCountdown = CarConstant.AccNoOfFrames;
+        }
+
+        if (Input.GetKeyDown("z"))
+        {
+            this.SetLandType(LandType.Grass);
+        }
+        if (Input.GetKeyDown("x"))
+        {
+            this.SetLandType(LandType.Road);
         }
         
     }
@@ -142,46 +164,23 @@ public class Car : MonoBehaviour {
 	private void OnTriggerEnter2D(Collider2D other){
         if (other.GetComponent<DestinationFlag>() != null)
         {
-            print("win");
-            this.alive = false;
-            this.rigi.velocity = Vector2.zero;
             GameController.instance.gameWin();
         }
-		if (other.GetComponent<GrassLand> () != null) {
-			this.updateVeclocity (0.5f);
-		}
-	}
-
-	private void OnTriggerExit2D(Collider2D other){
-		if (other.GetComponent<GrassLand> () != null) {
-			this.updateVeclocity (2f);
-		}
 	}
 
 	private void OnTriggerStay2D(Collider2D other){
-//		print("into collider");
-		if (other.GetComponent<Zombie> () != null || other.GetComponent<helmetZombie> () != null) {
+		if (other.GetComponent<Zombie> () != null ||other.GetComponent<explosionZombie> () != null ||other.GetComponent<helmetZombie> () != null) {
 			float targetX = other.transform.position.x;
 			float targetY = other.transform.position.y;
 			float carX = this.transform.position.x;
 			float carY = this.transform.position.y;
 			float dx = carX - targetX;
 			float dy = carY - targetY;
-			if (dx * dx + dy * dy < 1) {
-				//this.stopCar ();
-//				this.rigi.velocity = Vector2.zero;
-//				this.alive = false;
+			if (dx * dx + dy * dy < 0.05 && GameController.instance.isGameStart()) {
 				GameController.instance.gameOver ();
 			}
 
-		} 
-		if (other.GetComponent<ExplisonFire> () != null) {
-			this.rigi.velocity = Vector2.zero;
-			this.alive = false;
-			GameController.instance.gameOver ();
-
 		}
-			
 	}
 
 }

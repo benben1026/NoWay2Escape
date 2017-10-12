@@ -20,7 +20,7 @@ public class explosionZombie : MonoBehaviour {
 	public int explosionCount;
 	private Vector2 chasingVelocity;
 	public GameObject expPrefab;
-
+	public GameObject zombiePrefab;
 
 	private void Awake()
 	{
@@ -31,7 +31,7 @@ public class explosionZombie : MonoBehaviour {
 	void Start () {
 		chasingCount = 80;
 
-		constantV = 3f;
+		constantV = 0.5f;
 		this.rigi.velocity = new Vector2(0f, constantV);
 		chasingVelocity = new Vector2 (0f, 2 * constantV);
 		this.turningAngle = 0.02f; // Radian
@@ -81,7 +81,7 @@ public class explosionZombie : MonoBehaviour {
 		Destroy (this.gameObject);
 	}
 	void chasing(){
-		if (!Car.instance.isAlive())
+		if (Car.instance.GetCarStatus() == Car.CarStatusType.Die || Car.instance.GetCarStatus() == Car.CarStatusType.Win)
 		{
 			return;
 		}
@@ -96,9 +96,9 @@ public class explosionZombie : MonoBehaviour {
 		float cosangle = Vector2.Dot (dir, this.rigi.velocity)/(dir.magnitude * this.rigi.velocity.magnitude);
 		float angle = Mathf.Acos (cosangle);
 		Vector2 currV = this.rigi.velocity;
-		float alphx = currV.x;
-		float alphy = currV.y;
-		float thy = (targetX - selfX) * alphy / alphx + selfY;
+//		float alphx = currV.x;
+//		float alphy = currV.y;
+//		float thy = (targetX - selfX) * alphy / alphx + selfY;
 
 		float x = this.rigi.velocity.x * chasingVelocity.magnitude/this.rigi.velocity.magnitude;
 		float y = this.rigi.velocity.y * chasingVelocity.magnitude/this.rigi.velocity.magnitude;
@@ -155,15 +155,27 @@ public class explosionZombie : MonoBehaviour {
 	//		}
 	//	}
 	private void OnTriggerStay2D(Collider2D other){
-
-		if (other.GetComponent<Car> () != null) {
+		//		print ("stay");
+		if (other.GetComponent<Car> () != null && GameController.instance.isGameStart()) {
 			isCarFound = true;
-			//			print ("stay");
+			print ("iscar");
 			targetX = other.transform.position.x;
 			targetY = other.transform.position.y;
-			//			print (targetX);
-			//			print (targetY);
+
+			float zX = this.transform.position.x;
+			float zY = this.transform.position.y;
+			float dx = zX - targetX;
+			float dy = zY - targetY;
+			if (dx * dx + dy * dy < 0.05) {
+				print ("too close");
+
+				explosion ();
+				Vector2 objectPoolPosition = new Vector2 (zX, zY);
+				Instantiate (zombiePrefab,objectPoolPosition, gameObject.transform.rotation);
+
+			}
 		}
+
 	}
 	private void OnTriggerExit2D(Collider2D other){
 

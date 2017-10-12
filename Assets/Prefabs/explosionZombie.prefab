@@ -20,12 +20,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4810045525901278}
   - component: {fileID: 212256737297826466}
-  - component: {fileID: 114177548007650922}
   - component: {fileID: 50140282535711190}
   - component: {fileID: 58273927636191256}
   - component: {fileID: 61448285217485178}
   - component: {fileID: 95511423612622028}
-  - component: {fileID: 114428434964803362}
+  - component: {fileID: 114631102953101028}
   m_Layer: 0
   m_Name: explosionZombie
   m_TagString: Untagged
@@ -41,7 +40,7 @@ Transform:
   m_GameObject: {fileID: 1131545668782342}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 23.4, y: 41.1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.07, y: 0.07, z: 0.07}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -123,24 +122,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114177548007650922
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1131545668782342}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ca83c481a5d448fcbc0d99fdd112961, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turningAngle: 0
-  threadHold: 5
-  isCarFound: 0
-  targetX: 0
-  targetY: 0
-  constantV: 0
---- !u!114 &114428434964803362
+--- !u!114 &114631102953101028
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -148,7 +130,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1131545668782342}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bb95dd1f639c4e539071f6c0c91895b, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b33df217c5d94a78b59aa4a06441d52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   turningAngle: 0
@@ -158,7 +140,9 @@ MonoBehaviour:
   targetY: 0
   constantV: 0
   explosionCount: 0
-  expPrefab: {fileID: 1917813054647984, guid: 43687072200c14097a4485e5ab98f70d, type: 2}
+  expPrefab: {fileID: 1917813054647984, guid: 47125d82bebd549368044dd2ec88c385, type: 2}
+  zombiePrefab: {fileID: 1248834651224412, guid: 1345c1c4fea364982a256b4e4cc075d0,
+    type: 2}
 --- !u!212 &212256737297826466
 SpriteRenderer:
   m_ObjectHideFlags: 1

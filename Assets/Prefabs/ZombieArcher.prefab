@@ -9,22 +9,22 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1884728764065848}
+  m_RootGameObject: {fileID: 1853838725793762}
   m_IsPrefabParent: 1
---- !u!1 &1884728764065848
+--- !u!1 &1853838725793762
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4588795130037942}
-  - component: {fileID: 212019106380147694}
-  - component: {fileID: 95130170481490412}
-  - component: {fileID: 50420311751904740}
-  - component: {fileID: 58354483840321368}
-  - component: {fileID: 61955754587877662}
-  - component: {fileID: 114185871356726686}
+  - component: {fileID: 4535500690215018}
+  - component: {fileID: 212572303796559382}
+  - component: {fileID: 95332815042057534}
+  - component: {fileID: 50824607624898358}
+  - component: {fileID: 58926439615053612}
+  - component: {fileID: 61455745958886416}
+  - component: {fileID: 114367586844833246}
   m_Layer: 0
   m_Name: ZombieArcher
   m_TagString: Untagged
@@ -32,26 +32,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4588795130037942
+--- !u!4 &4535500690215018
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1884728764065848}
+  m_GameObject: {fileID: 1853838725793762}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.418123, y: 17.2877, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 8.8, y: 4.5, z: 0}
+  m_LocalScale: {x: 0.07073435, y: 0.07449818, z: 0.112169065}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50420311751904740
+--- !u!50 &50824607624898358
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1884728764065848}
+  m_GameObject: {fileID: 1853838725793762}
   m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -65,12 +65,12 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &58354483840321368
+--- !u!58 &58926439615053612
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1884728764065848}
+  m_GameObject: {fileID: 1853838725793762}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -80,12 +80,12 @@ CircleCollider2D:
   m_Offset: {x: -0.49, y: 0}
   serializedVersion: 2
   m_Radius: 8
---- !u!61 &61955754587877662
+--- !u!61 &61455745958886416
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1884728764065848}
+  m_GameObject: {fileID: 1853838725793762}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -105,13 +105,13 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.3, y: 3.04}
   m_EdgeRadius: 0
---- !u!95 &95130170481490412
+--- !u!95 &95332815042057534
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1884728764065848}
+  m_GameObject: {fileID: 1853838725793762}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 70eef6b32d130a44ea08cbab757bed2d, type: 2}
@@ -122,12 +122,12 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114185871356726686
+--- !u!114 &114367586844833246
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1884728764065848}
+  m_GameObject: {fileID: 1853838725793762}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ca83c481a5d448fcbc0d99fdd112961, type: 3}
@@ -139,12 +139,14 @@ MonoBehaviour:
   targetX: 0
   targetY: 0
   constantV: 0
---- !u!212 &212019106380147694
+  zombiePrefab: {fileID: 1173349904656924, guid: e02b1862d9db54c75812bbca327fe31a,
+    type: 2}
+--- !u!212 &212572303796559382
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1884728764065848}
+  m_GameObject: {fileID: 1853838725793762}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
