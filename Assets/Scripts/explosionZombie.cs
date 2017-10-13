@@ -21,6 +21,8 @@ public class explosionZombie : MonoBehaviour {
 	private Vector2 chasingVelocity;
 	public GameObject expPrefab;
 	public GameObject zombiePrefab;
+	public float centerx = 12.5f;
+	public float centery = 9.36f;
 
 	private void Awake()
 	{
@@ -156,7 +158,7 @@ public class explosionZombie : MonoBehaviour {
 	//	}
 	private void OnTriggerStay2D(Collider2D other){
 		//		print ("stay");
-		if (other.GetComponent<Car> () != null && GameController.instance.isGameStart()) {
+		if ((other.GetComponent<Car> () != null && GameController.instance.isGameStart())|| other.GetComponent<Trap>() != null ) {
 			isCarFound = true;
 			print ("iscar");
 			targetX = other.transform.position.x;
@@ -183,6 +185,18 @@ public class explosionZombie : MonoBehaviour {
 			isCarFound = false;
 			//			print ("exit");
 
+		}
+	}
+	private void OnTriggerEnter(Collider2D other){
+		if (other.GetComponent<wall>() != null) {
+			print ("reach the edge");
+			float zX = this.transform.position.x;
+			float zY = this.transform.position.y;
+			float dx = centerx - zX;
+			float dy = centery - zY;
+			float mag = Mathf.Sqrt (dx * dx + dy * dy);
+			float v = mag / this.rigi.velocity.magnitude;
+			this.rigi.velocity = new Vector2 (dx * v, dy * v);
 		}
 	}
 }

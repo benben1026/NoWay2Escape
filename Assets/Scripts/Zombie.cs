@@ -14,6 +14,8 @@ public class Zombie : MonoBehaviour {
 	public float targetX;
 	public float targetY;
 	public float constantV;
+	public float centerx = 12.5f;
+	public float centery = 9.36f;
 
 	public GameObject zombiePrefab;
 
@@ -149,7 +151,7 @@ public class Zombie : MonoBehaviour {
 	//	}
 	private void OnTriggerStay2D(Collider2D other){
 //		print ("stay");
-		if (other.GetComponent<Car> () != null && GameController.instance.isGameStart()) {
+		if ((other.GetComponent<Car> () != null && GameController.instance.isGameStart())|| other.GetComponent<Trap>() != null ) {
 			isCarFound = true;
 			print ("iscar");
 			targetX = other.transform.position.x;
@@ -178,5 +180,18 @@ public class Zombie : MonoBehaviour {
 
 		}
 
+
+	}
+	private void OnTriggerEnter(Collider2D other){
+		if (other.GetComponent<wall>() != null) {
+			print ("reach the edge");
+			float zX = this.transform.position.x;
+			float zY = this.transform.position.y;
+			float dx = centerx - zX;
+			float dy = centery - zY;
+			float mag = Mathf.Sqrt (dx * dx + dy * dy);
+			float v = mag / this.rigi.velocity.magnitude;
+			this.rigi.velocity = new Vector2 (dx * v, dy * v);
+		}
 	}
 }
