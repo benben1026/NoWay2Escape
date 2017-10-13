@@ -31,7 +31,7 @@ public class ZombiePool : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Vector3 flagPositon = DestinationFlag.instance.transform.position;
-		print (flagPositon);
+		//print (flagPositon);
 		int x = (int)flagPositon.x;
 		int y = (int)flagPositon.y;
 		zombies = new GameObject[zombiePoolSize];

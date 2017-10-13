@@ -58,7 +58,7 @@ public class Zombie : MonoBehaviour {
 		}
 	}
 	void chasing(){
-        if (Car.instance.GetCarStatus() == Car.CarStatusType.Die || Car.instance.GetCarStatus() == Car.CarStatusType.Win)
+        if (GameController.instance.GetGameStatus() != GameController.GameStatus.start)
         {
             return;
         }
@@ -153,7 +153,6 @@ public class Zombie : MonoBehaviour {
 //		print ("stay");
 		if ((other.GetComponent<Car> () != null && GameController.instance.isGameStart())|| other.GetComponent<Trap>() != null ) {
 			isCarFound = true;
-			print ("iscar");
 			targetX = other.transform.position.x;
 			targetY = other.transform.position.y;
 
@@ -162,8 +161,6 @@ public class Zombie : MonoBehaviour {
 			float dx = zX - targetX;
 			float dy = zY - targetY;
 			if (dx * dx + dy * dy < 0.05) {
-				print ("too close");
-
 				Destroy (this.gameObject);
 				Vector2 objectPoolPosition = new Vector2 (zX, zY);
 				Instantiate (zombiePrefab,objectPoolPosition, gameObject.transform.rotation);
@@ -182,9 +179,8 @@ public class Zombie : MonoBehaviour {
 
 
 	}
-	private void OnTriggerEnter(Collider2D other){
+	private void OnTriggerEnter2D(Collider2D other){
 		if (other.GetComponent<wall>() != null) {
-			print ("reach the edge");
 			float zX = this.transform.position.x;
 			float zY = this.transform.position.y;
 			float dx = centerx - zX;

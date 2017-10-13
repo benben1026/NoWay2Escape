@@ -78,12 +78,11 @@ public class explosionZombie : MonoBehaviour {
 	}
 	void explosion(){
 		this.rigi.velocity = Vector2.zero;
-		print("show explosion");
 		Instantiate (expPrefab, new Vector2 (this.transform.position.x, this.transform.position.y), Quaternion.identity);
 		Destroy (this.gameObject);
 	}
 	void chasing(){
-		if (Car.instance.GetCarStatus() == Car.CarStatusType.Die || Car.instance.GetCarStatus() == Car.CarStatusType.Win)
+		if (GameController.instance.GetGameStatus() != GameController.GameStatus.start)
 		{
 			return;
 		}
@@ -160,7 +159,6 @@ public class explosionZombie : MonoBehaviour {
 		//		print ("stay");
 		if ((other.GetComponent<Car> () != null && GameController.instance.isGameStart())|| other.GetComponent<Trap>() != null ) {
 			isCarFound = true;
-			print ("iscar");
 			targetX = other.transform.position.x;
 			targetY = other.transform.position.y;
 
@@ -169,8 +167,6 @@ public class explosionZombie : MonoBehaviour {
 			float dx = zX - targetX;
 			float dy = zY - targetY;
 			if (dx * dx + dy * dy < 0.05) {
-				print ("too close");
-
 				explosion ();
 				Vector2 objectPoolPosition = new Vector2 (zX, zY);
 				Instantiate (zombiePrefab,objectPoolPosition, gameObject.transform.rotation);
@@ -187,9 +183,8 @@ public class explosionZombie : MonoBehaviour {
 
 		}
 	}
-	private void OnTriggerEnter(Collider2D other){
+	private void OnTriggerEnter2D(Collider2D other){
 		if (other.GetComponent<wall>() != null) {
-			print ("reach the edge");
 			float zX = this.transform.position.x;
 			float zY = this.transform.position.y;
 			float dx = centerx - zX;
