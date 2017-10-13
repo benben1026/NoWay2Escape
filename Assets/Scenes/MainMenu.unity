@@ -488,6 +488,7 @@ GameObject:
   - component: {fileID: 174939369}
   - component: {fileID: 174939368}
   - component: {fileID: 174939370}
+  - component: {fileID: 174939371}
   m_Layer: 5
   m_Name: MainMenuPanel
   m_TagString: Untagged
@@ -565,6 +566,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventSystem: {fileID: 0}
   selectedObject: {fileID: 0}
+--- !u!114 &174939371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 174939366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44a16660655651f4d88dc11e0e3d42e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &268925241
 GameObject:
   m_ObjectHideFlags: 0
@@ -3436,7 +3448,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1451229968}
+      - m_Target: {fileID: 174939371}
         m_MethodName: LoadScene
         m_Mode: 5
         m_Arguments:
