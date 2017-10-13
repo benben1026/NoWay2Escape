@@ -170,16 +170,29 @@ public class Car : MonoBehaviour {
 
 	private void OnTriggerStay2D(Collider2D other){
 		if (other.GetComponent<Zombie> () != null ||other.GetComponent<explosionZombie> () != null ||other.GetComponent<helmetZombie> () != null) {
+			if (this.carStatus == Car.CarStatusType.Accelerate || GameController.instance.GetGameStatus() != GameController.GameStatus.start) {
+				return;
+			}
 			float targetX = other.transform.position.x;
 			float targetY = other.transform.position.y;
 			float carX = this.transform.position.x;
 			float carY = this.transform.position.y;
 			float dx = carX - targetX;
 			float dy = carY - targetY;
-			if (dx * dx + dy * dy < 0.05 && GameController.instance.isGameStart()) {
+			if (dx * dx + dy * dy < 0.05) {
 				GameController.instance.gameOver ();
 			}
 
+		}  else if (other.GetComponent<ExplisonFire> () != null) {
+			float targetX = other.transform.position.x;
+			float targetY = other.transform.position.y;
+			float carX = this.transform.position.x;
+			float carY = this.transform.position.y;
+			float dx = carX - targetX;
+			float dy = carY - targetY;
+			if (dx * dx + dy * dy < 0.1) {
+				GameController.instance.gameOver ();
+			}
 		}
 	}
 

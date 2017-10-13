@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour {
     
     private int timeLeft;
     private float time;
-    private GameStatus gameStatus;   // 0 -> ongoing; 1-> success; 2-> fail
+    private GameStatus gameStatus;
 	// Use this for initialization
 	void Awake () {
 		if (instance == null) {

@@ -18,8 +18,8 @@ public class ZombiePool : MonoBehaviour {
 
 	public int threadHold = 5;
 	private Vector2 objectPoolPosition;
-	private int startedge = 0;
-	private int endedge = 15;
+	private int radius = 2;
+
 
 
 	public List<GameObject> pooledObjects;
@@ -30,21 +30,24 @@ public class ZombiePool : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		Vector3 flagPositon = DestinationFlag.instance.transform.position;
+		print (flagPositon);
+		int x = (int)flagPositon.x;
+		int y = (int)flagPositon.y;
 		zombies = new GameObject[zombiePoolSize];
 		expzombies = new GameObject[zombiePoolSize];
 		helzombies = new GameObject[zombiePoolSize];
 		rnd = new System.Random();
 		for (int i = 0; i < zombiePoolSize; i++) {
-			objectPoolPosition = new Vector2 (rnd.Next(startedge,endedge), rnd.Next(startedge,endedge));
+			objectPoolPosition = new Vector2 (rnd.Next(x - radius,x + radius), rnd.Next(y - radius, y + radius));
 			zombies [i] = (GameObject)Instantiate (zombiePrefab,objectPoolPosition, gameObject.transform.rotation);
 			zombies [i].transform.position = objectPoolPosition;
 
-			objectPoolPosition = new Vector2 (rnd.Next(startedge,endedge), rnd.Next(startedge,endedge));
+			objectPoolPosition = new Vector2 (rnd.Next(x - radius,x + radius), rnd.Next(y - radius, y + radius));
 			expzombies [i] = (GameObject)Instantiate (expzombiePrefab,objectPoolPosition, gameObject.transform.rotation);
 			expzombies [i].transform.position = objectPoolPosition;
 
-			objectPoolPosition = new Vector2 (rnd.Next(startedge,endedge), rnd.Next(startedge,endedge));
+			objectPoolPosition = new Vector2 (rnd.Next(x - radius,x + radius), rnd.Next(y - radius, y + radius));
 			helzombies [i] = (GameObject)Instantiate (helzombiePrefab,objectPoolPosition, gameObject.transform.rotation);
 			helzombies [i].transform.position = objectPoolPosition;
 
