@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 	public static GameController instance;
-    public Text gamePromptText;
+    public Text gameFinishInfo;
     public Text countDownText;
     public enum GameStatus { prepare, starting, start, win, fail};
     
     private int timeLeft;
     private float time;
     private GameStatus gameStatus;
+    public GameObject gameOverPanel;
+
 	// Use this for initialization
 	void Awake () {
 		if (instance == null) {
@@ -22,12 +25,14 @@ public class GameController : MonoBehaviour {
 		}
 	}
 	void Start () {
-        gamePromptText.enabled = false;
+        gameFinishInfo.enabled = false;
         timeLeft = 60;
         updateTime();
         time = 0.0f;
         gameStatus = 0;
         gameStatus = GameStatus.prepare;
+        gameOverPanel.SetActive(false);
+
 	}
 	
 	// Update is called once per frame
@@ -80,17 +85,21 @@ public class GameController : MonoBehaviour {
 			return;
 		}
         gameStatus = GameStatus.fail;
-        gamePromptText.text = "Game Over";
-        gamePromptText.enabled = true;
+        gameFinishInfo.text = "Game Over";
+        gameFinishInfo.enabled = true;
         Car.instance.SetCarStatus(Car.CarStatusType.Die);
+        gameOverPanel.SetActive(true);
 	}
 
     public void gameWin()
     {
         gameStatus = GameStatus.win;
-        gamePromptText.text = "Congratulations!";
-        gamePromptText.enabled = true;
+        gameFinishInfo.text = "Congratulations!";
+        gameFinishInfo.enabled = true;        
         Car.instance.SetCarStatus(Car.CarStatusType.Win);
+        gameOverPanel.SetActive(true);
+        // Time.timeScale = 0;
+
     }
 
     private void updateTime()
