@@ -7,14 +7,15 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 	public static GameController instance;
-    public Text gameFinishInfo;
+    public Text gameFalseInfo;
+    public Text gameWinInfo;
     public Text countDownText;
     public enum GameStatus { prepare, starting, start, win, fail};
     
     private int timeLeft;
     private float time;
     private GameStatus gameStatus;
-    public GameObject gameOverPanel;
+    public GameObject gameWinPanel, gameFalsePanel;
 
 	// Use this for initialization
 	void Awake () {
@@ -25,14 +26,15 @@ public class GameController : MonoBehaviour {
 		}
 	}
 	void Start () {
-        gameFinishInfo.enabled = false;
+        gameFalseInfo.enabled = false;
+        gameWinInfo.enabled = false;
         timeLeft = 60;
         updateTime();
         time = 0.0f;
         gameStatus = 0;
         gameStatus = GameStatus.prepare;
-        gameOverPanel.SetActive(false);
-
+        gameWinPanel.SetActive(false);
+        gameFalsePanel.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -85,20 +87,22 @@ public class GameController : MonoBehaviour {
 			return;
 		}
         gameStatus = GameStatus.fail;
-        gameFinishInfo.text = "Game Over";
-        gameFinishInfo.enabled = true;
+        gameFalseInfo.text = "Game Over";
+        gameFalseInfo.enabled = true;
         Car.instance.SetCarStatus(Car.CarStatusType.Die);
-        gameOverPanel.SetActive(true);
+        gameFalsePanel.SetActive(true);
+        gameWinPanel.SetActive(false);
+
 	}
 
     public void gameWin()
     {
         gameStatus = GameStatus.win;
-        gameFinishInfo.text = "Congratulations!";
-        gameFinishInfo.enabled = true;        
+        gameWinInfo.text = "Congratulations!";
+        gameWinInfo.enabled = true;        
         Car.instance.SetCarStatus(Car.CarStatusType.Win);
-        gameOverPanel.SetActive(true);
-        // Time.timeScale = 0;
+        gameWinPanel.SetActive(true);
+        gameFalsePanel.SetActive(false);
 
     }
 
