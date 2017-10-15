@@ -57,14 +57,12 @@ public class explosionZombie : MonoBehaviour {
 
 
 		if (isCarFound) {
-			print ("is car found");
 //			this.rigi.velocity = chasingVelocity;
 			chasing ();
 			if (chasingCount > 0) {
 				
 				chasingCount--;
 			} else {
-				print ("explosion");
 				this.rigi.velocity = Vector2.zero;
 				explosion ();
 
@@ -78,7 +76,6 @@ public class explosionZombie : MonoBehaviour {
 		}
 	}
 	void explosion(){
-		print ("should explosion");
 		this.rigi.velocity = Vector2.zero;
 		Instantiate (expPrefab, new Vector2 (this.transform.position.x, this.transform.position.y), Quaternion.identity);
 		Destroy (this.gameObject);

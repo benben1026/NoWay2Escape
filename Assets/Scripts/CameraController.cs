@@ -12,7 +12,7 @@ public class CameraController : MonoBehaviour {
     private int noOfFrameToMove = 60;
 
 	void Start () {
-        height = -2;
+        height = -4;
 		offset = new Vector3 (0, 0, height);
         transform.position = new Vector3(12.5f, 10, -15);
         gc = GameController.instance;

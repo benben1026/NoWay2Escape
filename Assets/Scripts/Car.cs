@@ -14,7 +14,7 @@ class CarConstant
 
     public static float TurningAngle = 0.03f; // Radian
 
-    public static int BaseAccTimes = 3;
+    public static int BaseAccTimes = 5;
 }
 
 public class Car : MonoBehaviour {
