@@ -140,9 +140,11 @@ MonoBehaviour:
   targetY: 0
   constantV: 0
   explosionCount: 0
-  expPrefab: {fileID: 1917813054647984, guid: 47125d82bebd549368044dd2ec88c385, type: 2}
+  expPrefab: {fileID: 1754752345391654, guid: 47125d82bebd549368044dd2ec88c385, type: 2}
   zombiePrefab: {fileID: 1248834651224412, guid: 1345c1c4fea364982a256b4e4cc075d0,
     type: 2}
+  centerx: 12.5
+  centery: 9.36
 --- !u!212 &212256737297826466
 SpriteRenderer:
   m_ObjectHideFlags: 1
