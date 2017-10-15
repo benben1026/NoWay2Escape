@@ -180,6 +180,16 @@ public class Car : MonoBehaviour {
 				GameController.instance.gameOver ();
 			}
 
+		} else if (other.GetComponent<ExplisonFire> () != null && this.carStatus != CarStatusType.Accelerate) {
+			float targetX = other.transform.position.x;
+			float targetY = other.transform.position.y;
+			float carX = this.transform.position.x;
+			float carY = this.transform.position.y;
+			float dx = carX - targetX;
+			float dy = carY - targetY;
+			if (dx * dx + dy * dy < 0.1) {
+				GameController.instance.gameOver ();
+			}
 		}
 	}
 
