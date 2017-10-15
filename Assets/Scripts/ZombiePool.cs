@@ -6,7 +6,7 @@ public class ZombiePool : MonoBehaviour {
 
 	public static ZombiePool SharedInstance;
 
-	public int zombiePoolSize = 5;
+	public int zombiePoolSize = 1;
 	public float spawnRate = 4f;
 	private GameObject[] zombies;
 	public GameObject zombiePrefab;
@@ -30,6 +30,7 @@ public class ZombiePool : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		this.zombiePoolSize = 20;
 		Vector3 flagPositon = DestinationFlag.instance.transform.position;
 		//print (flagPositon);
 		int x = (int)flagPositon.x;
@@ -39,17 +40,17 @@ public class ZombiePool : MonoBehaviour {
 		helzombies = new GameObject[zombiePoolSize];
 		rnd = new System.Random();
 		for (int i = 0; i < zombiePoolSize; i++) {
-			objectPoolPosition = new Vector2 (rnd.Next(x - radius,x + radius), rnd.Next(y - radius, y + radius));
-			zombies [i] = (GameObject)Instantiate (zombiePrefab,objectPoolPosition, gameObject.transform.rotation);
-			zombies [i].transform.position = objectPoolPosition;
+//			objectPoolPosition = new Vector2 (rnd.Next(x - radius,x + radius), rnd.Next(y - radius, y + radius));
+//			zombies [i] = (GameObject)Instantiate (zombiePrefab,objectPoolPosition, gameObject.transform.rotation);
+//			zombies [i].transform.position = objectPoolPosition;
 
 			objectPoolPosition = new Vector2 (rnd.Next(x - radius,x + radius), rnd.Next(y - radius, y + radius));
 			expzombies [i] = (GameObject)Instantiate (expzombiePrefab,objectPoolPosition, gameObject.transform.rotation);
 			expzombies [i].transform.position = objectPoolPosition;
 
-			objectPoolPosition = new Vector2 (rnd.Next(x - radius,x + radius), rnd.Next(y - radius, y + radius));
-			helzombies [i] = (GameObject)Instantiate (helzombiePrefab,objectPoolPosition, gameObject.transform.rotation);
-			helzombies [i].transform.position = objectPoolPosition;
+//			objectPoolPosition = new Vector2 (rnd.Next(x - radius,x + radius), rnd.Next(y - radius, y + radius));
+//			helzombies [i] = (GameObject)Instantiate (helzombiePrefab,objectPoolPosition, gameObject.transform.rotation);
+//			helzombies [i].transform.position = objectPoolPosition;
 
 
 		}

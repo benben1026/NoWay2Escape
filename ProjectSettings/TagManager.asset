@@ -18,10 +18,10 @@ TagManager:
   - UI
   - 
   - 
+  - grass
+  - tree
   - player
-  - 
-  - 
-  - 
+  - exp
   - 
   - 
   - 
@@ -54,4 +54,7 @@ TagManager:
     locked: 0
   - name: player
     uniqueID: 220414221
+    locked: 0
+  - name: exp
+    uniqueID: 2373646761
     locked: 0
