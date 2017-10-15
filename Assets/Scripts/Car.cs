@@ -166,6 +166,10 @@ public class Car : MonoBehaviour {
         {
             GameController.instance.gameWin();
         }
+		if (other.GetComponent<wall> () != null) 
+		{
+			GameController.instance.gameOver ();
+		}
 	}
 
 	private void OnTriggerStay2D(Collider2D other){
