@@ -187,7 +187,8 @@ public class Car : MonoBehaviour {
 				GameController.instance.gameOver ();
 			}
 
-		}  else if (other.GetComponent<ExplisonFire> () != null) {
+		} else if (other.GetComponent<ExplisonFire> () != null && this.carStatus != CarStatusType.Accelerate) {
+
 			float targetX = other.transform.position.x;
 			float targetY = other.transform.position.y;
 			float carX = this.transform.position.x;
