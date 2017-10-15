@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour {
     public Text gameFalseInfo;
     public Text gameWinInfo;
     public Text countDownText;
+	public Text accTimeLeft;
     public enum GameStatus { prepare, starting, start, win, fail};
     
     private int timeLeft;
@@ -47,6 +48,7 @@ public class GameController : MonoBehaviour {
             }
             return;
         }
+		updateAccTiemLeft ();
 		if (timeLeft <= 0){
 			timeLeft = 0;
 			updateTime ();
@@ -110,4 +112,9 @@ public class GameController : MonoBehaviour {
     {
         countDownText.text = "Time Left: " + timeLeft.ToString() + " s";
     }
+
+	private void updateAccTiemLeft()
+	{
+		accTimeLeft.text = "Accelerate Time Left: " + Car.instance.accelerateTimeLeft;
+	}
 }

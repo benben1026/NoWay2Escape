@@ -8,9 +8,9 @@ class CarConstant
 
     public static float OnGrassDeaccScale = 0.5f;
 
-    public static float AccScale = 3f;
+    public static float AccScale = 4f;
 
-    public static int AccNoOfFrames = 30;
+    public static int AccNoOfFrames = 40;
 
     public static float TurningAngle = 0.03f; // Radian
 
