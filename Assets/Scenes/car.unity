@@ -12763,6 +12763,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 58565742139435040, guid: 6f259bb5b183149d798a06bae937faed,
+        type: 2}
+      propertyPath: m_Radius
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6f259bb5b183149d798a06bae937faed, type: 2}
   m_IsPrefabParent: 0
@@ -23531,6 +23536,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 58926439615053612, guid: 4121c76a109b34956be4d8f3297fc691,
+        type: 2}
+      propertyPath: m_Radius
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4121c76a109b34956be4d8f3297fc691, type: 2}
   m_IsPrefabParent: 0
@@ -26187,10 +26197,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.26}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.3}
     oldSize: {x: 0.7, y: 1.4}
     newSize: {x: 1.05, y: 2.34}
     adaptiveTilingThreshold: 0.5
@@ -26198,7 +26208,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 0.73, y: 1.46}
   m_EdgeRadius: 0
 --- !u!1 &1994045417
 GameObject:
@@ -28060,6 +28070,11 @@ Prefab:
       value: 
       objectReference: {fileID: 1754752345391654, guid: 47125d82bebd549368044dd2ec88c385,
         type: 2}
+    - target: {fileID: 58273927636191256, guid: 6726d5ee9019e4952b8de0d00db00949,
+        type: 2}
+      propertyPath: m_Radius
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6726d5ee9019e4952b8de0d00db00949, type: 2}
   m_IsPrefabParent: 0
