@@ -168,6 +168,19 @@ public class Zombie : MonoBehaviour {
 
 			}
 		}
+		if (other.GetComponent<ExplisonFire> () != null) {
+			float targetX = other.transform.position.x;
+			float targetY = other.transform.position.y;
+			float carX = this.transform.position.x;
+			float carY = this.transform.position.y;
+			float dx = carX - targetX;
+			float dy = carY - targetY;
+			if (dx * dx + dy * dy < 16) {
+				
+					Destroy (this.gameObject);
+
+			}
+		}
 	}
 
 	private void OnTriggerExit2D(Collider2D other){

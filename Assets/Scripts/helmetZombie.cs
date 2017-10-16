@@ -148,9 +148,14 @@ public class helmetZombie : MonoBehaviour {
 			float dx = zX - targetX;
 			float dy = zY - targetY;
 			if (dx * dx + dy * dy < 0.05) {
-				Destroy (this.gameObject);
-				Vector2 objectPoolPosition = new Vector2 (zX, zY);
-				Instantiate (zombiePrefab,objectPoolPosition, gameObject.transform.rotation);
+				if (ishurt == false) {
+					ishurt = true;
+				} else {
+					Destroy (this.gameObject);
+					Vector2 objectPoolPosition = new Vector2 (zX, zY);
+					Instantiate (zombiePrefab,objectPoolPosition, gameObject.transform.rotation);
+				}
+
 
 			}
 		}
@@ -162,9 +167,14 @@ public class helmetZombie : MonoBehaviour {
 			float dx = zX - targetX;
 			float dy = zY - targetY;
 			if (dx * dx + dy * dy < 0.1) {
-				Destroy (this.gameObject);
-				Vector2 objectPoolPosition = new Vector2 (zX, zY);
-				Instantiate (zombiePrefab,objectPoolPosition, gameObject.transform.rotation);
+				if (ishurt == false) {
+					ishurt = true;
+				} else {
+					Destroy (this.gameObject);
+					Vector2 objectPoolPosition = new Vector2 (zX, zY);
+					Instantiate (zombiePrefab,objectPoolPosition, gameObject.transform.rotation);
+				}
+
 
 			}
 		}
@@ -176,11 +186,7 @@ public class helmetZombie : MonoBehaviour {
 			float dx = carX - targetX;
 			float dy = carY - targetY;
 			if (dx * dx + dy * dy < 16) {
-				if (ishurt == false) {
-					ishurt = true;
-				} else {
-					Destroy (this.gameObject);
-				}
+				Destroy (this.gameObject);
 
 			}
 		}

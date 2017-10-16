@@ -79,7 +79,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -0.49, y: 0}
   serializedVersion: 2
-  m_Radius: 8
+  m_Radius: 15
 --- !u!61 &61455745958886416
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -139,6 +139,8 @@ MonoBehaviour:
   targetX: 0
   targetY: 0
   constantV: 0
+  centerx: 12.5
+  centery: 9.36
   zombiePrefab: {fileID: 1173349904656924, guid: e02b1862d9db54c75812bbca327fe31a,
     type: 2}
 --- !u!212 &212572303796559382

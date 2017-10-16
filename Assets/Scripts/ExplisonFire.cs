@@ -7,7 +7,7 @@ public class ExplisonFire : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		expCount = 80;
+		expCount = 40;
 	}
 	
 	// Update is called once per frame
