@@ -32,7 +32,6 @@ public class explosionZombie : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		chasingCount = 80;
-
 		constantV = 0.5f;
 		this.rigi.velocity = new Vector2(0f, constantV);
 		chasingVelocity = new Vector2 (0f, 2 * constantV);

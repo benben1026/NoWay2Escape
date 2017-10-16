@@ -6,7 +6,7 @@ class CarConstant
 {
     public static float BaseVelocity = 1f;
 
-    public static float OnGrassDeaccScale = 0.5f;
+    public static float OnGrassDeaccScale = 0.4f;
 
     public static float AccScale = 4f;
 

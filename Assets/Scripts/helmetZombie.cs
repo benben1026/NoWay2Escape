@@ -26,7 +26,7 @@ public class helmetZombie : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		ishurt = false;
-		constantV = 0.5f;
+		constantV = 0.8f;
 		this.rigi.velocity = new Vector2(0f, constantV);
 		this.turningAngle = 0.02f; // Radian
 
