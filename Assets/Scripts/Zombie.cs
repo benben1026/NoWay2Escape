@@ -18,6 +18,7 @@ public class Zombie : MonoBehaviour {
 	public float centery = 9.36f;
 
 	public GameObject zombiePrefab;
+	public GameObject movingCenter;
 
 	private void Awake()
 	{
@@ -37,6 +38,7 @@ public class Zombie : MonoBehaviour {
 		isTurning = false;
 		Turningcount = 0;
 		isCarFound = false;
+		movingCenter = (GameObject)Instantiate (movingCenter, this.transform.position, gameObject.transform.rotation);
 	}
 
 	// Update is called once per frame
@@ -186,7 +188,16 @@ public class Zombie : MonoBehaviour {
 	private void OnTriggerExit2D(Collider2D other){
 		if (other.GetComponent<Car> () != null) {
 			isCarFound = false;
+			Destroy (this.movingCenter.gameObject);
+			movingCenter = (GameObject)Instantiate (movingCenter, this.transform.position, gameObject.transform.rotation);
 		}
+		if (!isCarFound) {
+			if (other.GetComponent<MovingCenter> () != null) {
+				print ("out of center");
+				this.rigi.velocity = (-1) * this.rigi.velocity;
+			}
+		}
+
 
 
 	}
@@ -194,8 +205,5 @@ public class Zombie : MonoBehaviour {
 		if (other.GetComponent<wall>() != null) {
 			this.rigi.velocity = (-1) * this.rigi.velocity;
 		}
-
-
-
 	}
 }
