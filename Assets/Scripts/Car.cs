@@ -15,6 +15,8 @@ class CarConstant
     public static float TurningAngle = 0.03f; // Radian
 
     public static int BaseAccTimes = 5;
+
+    public static int DashCoolDownTime = 4;
 }
 
 public class Car : MonoBehaviour {
@@ -29,6 +31,9 @@ public class Car : MonoBehaviour {
     private CarStatusType carStatus;
     private LandType landType;
     private bool ifInit;
+    private bool ifDash;
+    private float dashCoolDownTimeCounter;
+    private float move;
     
     
     private void Awake()
@@ -49,6 +54,9 @@ public class Car : MonoBehaviour {
         this.ifInit = false;
         carStatus = CarStatusType.Normal;
         landType = LandType.Road;
+        ifDash = false;
+        dashCoolDownTimeCounter = 0;
+        move = 0;
     }
 
     private void Init()
@@ -89,6 +97,23 @@ public class Car : MonoBehaviour {
 	public Vector2 GetPosition(){
 		return this.rigi.position;
 	}
+
+    public void Dash()
+    {
+        if (this.dashCoolDownTimeCounter < CarConstant.DashCoolDownTime)
+            return;
+        ifDash = true;
+    }
+
+    public void TurnLeft()
+    {
+        move = -1;
+    }
+
+    public void TurnRight()
+    {
+        move = 1;
+    }
     
     // Update is called once per frame
     void FixedUpdate ()
@@ -109,20 +134,24 @@ public class Car : MonoBehaviour {
             ifInit = true;
         }
 
-        float move = Input.GetAxis("Horizontal");
-        bool ifAcc = Input.GetKeyDown("q");
-        if (Input.touchCount > 0 && Input.GetTouch(0).position.x <= Screen.width * 0.3)
-        {
-            move = -1;
-        }
-        else if (Input.touchCount > 0 && Input.GetTouch(0).position.x >= Screen.width * 0.7)
-        {
-            move = 1;
-        }
-        else if (Input.touchCount > 0 && Input.GetTouch(0).position.x > Screen.width * 0.35 && Input.GetTouch(0).position.x < Screen.width * 0.65)
-        {
-            ifAcc = true;
-        }
+        //float move = Input.GetAxis("Horizontal");
+        ////ifDash = Input.GetKeyDown("q") || ifDash;
+        //if (Input.GetKeyDown("q"))
+        //{
+        //    this.Dash();
+        //}
+        //if (Input.touchCount > 0 && Input.GetTouch(0).position.x <= Screen.width * 0.3)
+        //{
+        //    move = -1;
+        //}
+        //else if (Input.touchCount > 0 && Input.GetTouch(0).position.x >= Screen.width * 0.7)
+        //{
+        //    move = 1;
+        //}
+        //else if (Input.touchCount > 0 && Input.GetTouch(0).position.x > Screen.width * 0.35 && Input.GetTouch(0).position.x < Screen.width * 0.65)
+        //{
+        //    ifDash = true;
+        //}
 
         if (move != 0)
         {
@@ -131,13 +160,17 @@ public class Car : MonoBehaviour {
             float angle = move * CarConstant.TurningAngle;
             this.rigi.velocity = new Vector2(x * Mathf.Cos(angle) + y * Mathf.Sin(angle), (-1) * x * Mathf.Sin(angle) + y * Mathf.Cos(angle));
             transform.Rotate(0, 0, (-1) * angle * 180 / Mathf.PI);
+            move = 0;
         }
-        
-        if (ifAcc && this.carStatus == CarStatusType.Normal && this.accelerateTimeLeft > 0)
+
+        dashCoolDownTimeCounter += Time.deltaTime;
+        if (ifDash && this.carStatus == CarStatusType.Normal && this.accelerateTimeLeft > 0)
         {
             this.carStatus = CarStatusType.Accelerate;
             this.rigi.velocity = CarConstant.AccScale * this.rigi.velocity;
             this.accelerateTimeLeft--;
+            ifDash = false;
+            dashCoolDownTimeCounter = 0;
         }
         else if(this.carStatus == CarStatusType.Accelerate && this.accelerateCountdown > 0)
         {
@@ -150,14 +183,14 @@ public class Car : MonoBehaviour {
             this.accelerateCountdown = CarConstant.AccNoOfFrames;
         }
 
-        if (Input.GetKeyDown("z"))
-        {
-            this.SetLandType(LandType.Grass);
-        }
-        if (Input.GetKeyDown("x"))
-        {
-            this.SetLandType(LandType.Road);
-        }
+        //if (Input.GetKeyDown("z"))
+        //{
+        //    this.SetLandType(LandType.Grass);
+        //}
+        //if (Input.GetKeyDown("x"))
+        //{
+        //    this.SetLandType(LandType.Road);
+        //}
         
     }
 

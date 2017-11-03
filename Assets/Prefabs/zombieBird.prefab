@@ -121,6 +121,9 @@ MonoBehaviour:
   targetX: 0
   targetY: 0
   constantV: 0
+  centerx: 12.5
+  centery: 9.36
+  zombiePrefab: {fileID: 0}
 --- !u!212 &212281328174567224
 SpriteRenderer:
   m_ObjectHideFlags: 1
