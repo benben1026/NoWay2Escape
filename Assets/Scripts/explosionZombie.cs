@@ -20,7 +20,7 @@ public class explosionZombie : MonoBehaviour {
 	public int explosionCount;
 	private Vector2 chasingVelocity;
 	public GameObject expPrefab;
-	public GameObject zombiePrefab;
+//	public GameObject zombiePrefab;
 	public float centerx = 12.5f;
 	public float centery = 9.36f;
 	public int chasingCount2 = 0;
@@ -77,7 +77,7 @@ public class explosionZombie : MonoBehaviour {
 		}
 	}
 	void explosion(){
-		this.rigi.velocity = Vector2.zero;
+//		this.rigi.velocity = Vector2.zero;
 		Instantiate (expPrefab, new Vector2 (this.transform.position.x, this.transform.position.y), Quaternion.identity);
 		Destroy (this.gameObject);
 	}
@@ -102,6 +102,7 @@ public class explosionZombie : MonoBehaviour {
 		Vector2 dir = (new Vector2(targetX,targetY)) - (new Vector2(selfX,selfY));
 		float cosangle = Vector2.Dot (dir, this.rigi.velocity)/(dir.magnitude * this.rigi.velocity.magnitude);
 		float angle = Mathf.Acos (cosangle);
+//		print (angle);
 		Vector2 currV = this.rigi.velocity;
 //		float alphx = currV.x;
 //		float alphy = currV.y;
@@ -109,7 +110,8 @@ public class explosionZombie : MonoBehaviour {
 
 		float x = this.rigi.velocity.x * chasingVelocity.magnitude/this.rigi.velocity.magnitude;
 		float y = this.rigi.velocity.y * chasingVelocity.magnitude/this.rigi.velocity.magnitude;
-		this.rigi.velocity = new Vector2(x * Mathf.Cos(angle) + y * Mathf.Sin(angle), (-1) * x * Mathf.Sin(angle) + y * Mathf.Cos(angle));
+		Vector2 nv = new Vector2(x * Mathf.Cos(angle) + y * Mathf.Sin(angle), (-1) * x * Mathf.Sin(angle) + y * Mathf.Cos(angle));
+		if(!float.IsNaN(nv.x)) this.rigi.velocity = nv;
 		//this.rigi.velocity = Vector2.zero;
 	}
 	void randomMove(){
@@ -163,7 +165,7 @@ public class explosionZombie : MonoBehaviour {
 			if (dx * dx + dy * dy < 0.05) {
 				Destroy (this.gameObject);
 				Vector2 objectPoolPosition = new Vector2 (zX, zY);
-				Instantiate (zombiePrefab,objectPoolPosition, gameObject.transform.rotation);
+//				Instantiate (zombiePrefab,objectPoolPosition, gameObject.transform.rotation);
 				explosion ();
 
 			}
@@ -178,7 +180,7 @@ public class explosionZombie : MonoBehaviour {
 			if (dx * dx + dy * dy < 0.1) {
 				Destroy (this.gameObject);
 				Vector2 objectPoolPosition = new Vector2 (zX, zY);
-				Instantiate (zombiePrefab,objectPoolPosition, gameObject.transform.rotation);
+//				Instantiate (zombiePrefab,objectPoolPosition, gameObject.transform.rotation);
 				explosion ();
 
 			}

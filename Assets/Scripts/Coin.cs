@@ -10,7 +10,7 @@ public class Coin : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		print ("here to init coin");
+//		print ("here to init coin");
 	}
 	
 	// Update is called once per frame

@@ -108,8 +108,8 @@ public class Zombie : MonoBehaviour {
 
 		float x = this.rigi.velocity.x;
 		float y = this.rigi.velocity.y;
-		this.rigi.velocity = new Vector2(x * Mathf.Cos(angle) + y * Mathf.Sin(angle), (-1) * x * Mathf.Sin(angle) + y * Mathf.Cos(angle));
-		//this.rigi.velocity = Vector2.zero;
+		Vector2 nv = new Vector2(x * Mathf.Cos(angle) + y * Mathf.Sin(angle), (-1) * x * Mathf.Sin(angle) + y * Mathf.Cos(angle));
+		if(!float.IsNaN(nv.x)) this.rigi.velocity = nv;
 	}
 	void randomMove(){
 
@@ -173,7 +173,7 @@ public class Zombie : MonoBehaviour {
 			float dx = zX - targetX;
 			float dy = zY - targetY;
 			if (dx * dx + dy * dy < 0.1) {
-				print ("hit trap count");
+//				print ("hit trap count");
 				Destroy (this.gameObject);
 				Vector2 objectPoolPosition = new Vector2 (zX, zY);
 				if (!this.isDead) {
