@@ -136,18 +136,23 @@ public class Car : MonoBehaviour {
 
         //float move = Input.GetAxis("Horizontal");
         ////ifDash = Input.GetKeyDown("q") || ifDash;
-        //if (Input.GetKeyDown("q"))
-        //{
-        //    this.Dash();
-        //}
-        //if (Input.touchCount > 0 && Input.GetTouch(0).position.x <= Screen.width * 0.3)
-        //{
-        //    move = -1;
-        //}
-        //else if (Input.touchCount > 0 && Input.GetTouch(0).position.x >= Screen.width * 0.7)
-        //{
-        //    move = 1;
-        //}
+        if (Input.GetKeyDown("q"))
+        {
+            this.Dash();
+        }
+		if (Input.GetAxis ("Horizontal") == 1) {
+			this.TurnRight ();
+		} else if (Input.GetAxis ("Horizontal") == -1) {
+			this.TurnLeft ();
+		}
+//        if (Input.touchCount > 0 && Input.GetTouch(0).position.x <= Screen.width * 0.3)
+//        {
+//            move = -1;
+//        }
+//        else if (Input.touchCount > 0 && Input.GetTouch(0).position.x >= Screen.width * 0.7)
+//        {
+//            move = 1;
+//        }
         //else if (Input.touchCount > 0 && Input.GetTouch(0).position.x > Screen.width * 0.35 && Input.GetTouch(0).position.x < Screen.width * 0.65)
         //{
         //    ifDash = true;

@@ -28,12 +28,22 @@ public class Dash : MonoBehaviour {
             gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f);
             rocket.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f);
         }
+		if (Input.touchCount > 0) 
+		{
+			for (int i = 0; i < Input.touchCount; i++) {
+				Touch touch = Input.GetTouch (i);
+				if (gameObject.GetComponent<Collider2D>() == Physics2D.OverlapPoint (new Vector2(touch.position.x, touch.position.y))) {
+					Car.instance.Dash();
+					anim.SetTrigger(dashHash);
+				}
+			}
+		}
         transform.position = car.transform.position + offset;
 	}
 
-    void OnMouseDown()
-    {
-        Car.instance.Dash();
-        anim.SetTrigger(dashHash);
-    }
+//    void OnMouseDown()
+//    {
+//        Car.instance.Dash();
+//        anim.SetTrigger(dashHash);
+//    }
 }
