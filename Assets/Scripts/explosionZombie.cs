@@ -23,6 +23,8 @@ public class explosionZombie : MonoBehaviour {
 	public GameObject zombiePrefab;
 	public float centerx = 12.5f;
 	public float centery = 9.36f;
+	public int chasingCount2 = 0;
+	public int chasingCountThreadHold = 2;
 
 	private void Awake()
 	{
@@ -31,7 +33,7 @@ public class explosionZombie : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		chasingCount = 80;
+		chasingCount = 100;
 		constantV = 0.5f;
 		this.rigi.velocity = new Vector2(0f, constantV);
 		chasingVelocity = new Vector2 (0f, 2 * constantV);
@@ -89,6 +91,12 @@ public class explosionZombie : MonoBehaviour {
 		//			Turningcount = 0;
 		//		} else
 		//			return;
+		if (chasingCount2 == 0) {
+			chasingCount2 = chasingCountThreadHold;
+		} else {
+			chasingCount2--;
+			return;
+		}
 		float selfX = this.transform.position.x;
 		float selfY = this.transform.position.y;
 		Vector2 dir = (new Vector2(targetX,targetY)) - (new Vector2(selfX,selfY));
@@ -182,7 +190,7 @@ public class explosionZombie : MonoBehaviour {
 			float carY = this.transform.position.y;
 			float dx = carX - targetX;
 			float dy = carY - targetY;
-			if (dx * dx + dy * dy < 16) {
+			if (dx * dx + dy * dy < 1.6) {
 				explosion ();
 				Destroy (this.gameObject);
 //				

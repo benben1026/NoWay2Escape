@@ -30,7 +30,7 @@ public class ZombiePool : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		this.zombiePoolSize = 50;
+		this.zombiePoolSize = 30;
 		Vector3 flagPositon = DestinationFlag.instance.transform.position;
 		Vector3 carPosition = Car.instance.transform.position;
 		float uniformDistance = (flagPositon - carPosition).magnitude;

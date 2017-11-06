@@ -16,6 +16,8 @@ public class Zombie : MonoBehaviour {
 	public float constantV;
 	public float centerx = 12.5f;
 	public float centery = 9.36f;
+	public int chasingCount = 0;
+	public int chasingCountThreadHold = 2;
 
 	public GameObject zombiePrefab;
 	public GameObject movingCenter;
@@ -64,6 +66,12 @@ public class Zombie : MonoBehaviour {
         {
             return;
         }
+		if (chasingCount == 0) {
+			chasingCount = chasingCountThreadHold;
+		} else {
+			chasingCount--;
+			return;
+		}
 		//		Turningcount++;
 		//		if (Turningcount == 40) {
 		//			Turningcount = 0;
@@ -177,7 +185,7 @@ public class Zombie : MonoBehaviour {
 			float carY = this.transform.position.y;
 			float dx = carX - targetX;
 			float dy = carY - targetY;
-			if (dx * dx + dy * dy < 16) {
+			if (dx * dx + dy * dy < 1.6) {
 				
 					Destroy (this.gameObject);
 

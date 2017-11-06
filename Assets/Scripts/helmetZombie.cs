@@ -18,6 +18,8 @@ public class helmetZombie : MonoBehaviour {
 	public GameObject zombiePrefab;
 	public float centerx = 12.5f;
 	public float centery = 9.36f;
+	public int chasingCount = 0;
+	public int chasingCountThreadHold = 2;
 	private void Awake()
 	{
 		rigi = GetComponent<Rigidbody2D>();
@@ -59,6 +61,12 @@ public class helmetZombie : MonoBehaviour {
 	void chasing(){
 		if (GameController.instance.GetGameStatus() != GameController.GameStatus.start)
 		{
+			return;
+		}
+		if (chasingCount == 0) {
+			chasingCount = 3;
+		} else {
+			chasingCount--;
 			return;
 		}
 		//		Turningcount++;
@@ -185,7 +193,7 @@ public class helmetZombie : MonoBehaviour {
 			float carY = this.transform.position.y;
 			float dx = carX - targetX;
 			float dy = carY - targetY;
-			if (dx * dx + dy * dy < 16) {
+			if (dx * dx + dy * dy < 0.1) {
 				Destroy (this.gameObject);
 
 			}
