@@ -40,7 +40,7 @@ Transform:
   m_GameObject: {fileID: 1853838725793762}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8.8, y: 4.5, z: 0}
-  m_LocalScale: {x: 0.07073435, y: 0.07449818, z: 0.112169065}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -142,6 +142,8 @@ MonoBehaviour:
   centerx: 12.5
   centery: 9.36
   zombiePrefab: {fileID: 1173349904656924, guid: e02b1862d9db54c75812bbca327fe31a,
+    type: 2}
+  movingCenter: {fileID: 1532721242120282, guid: 7963aba9a9f37425bb5adec6c488d443,
     type: 2}
 --- !u!212 &212572303796559382
 SpriteRenderer:

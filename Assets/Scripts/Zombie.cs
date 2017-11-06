@@ -16,8 +16,11 @@ public class Zombie : MonoBehaviour {
 	public float constantV;
 	public float centerx = 12.5f;
 	public float centery = 9.36f;
+	public int chasingCount = 0;
+	public int chasingCountThreadHold = 2;
 
 	public GameObject zombiePrefab;
+	public GameObject movingCenter;
 
 	private void Awake()
 	{
@@ -37,6 +40,7 @@ public class Zombie : MonoBehaviour {
 		isTurning = false;
 		Turningcount = 0;
 		isCarFound = false;
+		movingCenter = (GameObject)Instantiate (movingCenter, this.transform.position, gameObject.transform.rotation);
 	}
 
 	// Update is called once per frame
@@ -62,6 +66,12 @@ public class Zombie : MonoBehaviour {
         {
             return;
         }
+		if (chasingCount == 0) {
+			chasingCount = chasingCountThreadHold;
+		} else {
+			chasingCount--;
+			return;
+		}
 		//		Turningcount++;
 		//		if (Turningcount == 40) {
 		//			Turningcount = 0;
@@ -175,7 +185,7 @@ public class Zombie : MonoBehaviour {
 			float carY = this.transform.position.y;
 			float dx = carX - targetX;
 			float dy = carY - targetY;
-			if (dx * dx + dy * dy < 16) {
+			if (dx * dx + dy * dy < 1.6) {
 				
 					Destroy (this.gameObject);
 
@@ -186,7 +196,16 @@ public class Zombie : MonoBehaviour {
 	private void OnTriggerExit2D(Collider2D other){
 		if (other.GetComponent<Car> () != null) {
 			isCarFound = false;
+			Destroy (this.movingCenter.gameObject);
+			movingCenter = (GameObject)Instantiate (movingCenter, this.transform.position, gameObject.transform.rotation);
 		}
+		if (!isCarFound) {
+			if (other.GetComponent<MovingCenter> () != null) {
+				print ("out of center");
+				this.rigi.velocity = (-1) * this.rigi.velocity;
+			}
+		}
+
 
 
 	}
@@ -194,8 +213,5 @@ public class Zombie : MonoBehaviour {
 		if (other.GetComponent<wall>() != null) {
 			this.rigi.velocity = (-1) * this.rigi.velocity;
 		}
-
-
-
 	}
 }
