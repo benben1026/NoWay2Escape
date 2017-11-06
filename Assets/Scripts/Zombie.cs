@@ -18,6 +18,7 @@ public class Zombie : MonoBehaviour {
 	public float centery = 9.36f;
 	public int chasingCount = 0;
 	public int chasingCountThreadHold = 2;
+	private bool isDead = false;
 
 	public GameObject zombiePrefab;
 	public GameObject movingCenter;
@@ -172,9 +173,15 @@ public class Zombie : MonoBehaviour {
 			float dx = zX - targetX;
 			float dy = zY - targetY;
 			if (dx * dx + dy * dy < 0.1) {
+				print ("hit trap count");
 				Destroy (this.gameObject);
 				Vector2 objectPoolPosition = new Vector2 (zX, zY);
-				Instantiate (zombiePrefab,objectPoolPosition, gameObject.transform.rotation);
+				if (!this.isDead) {
+					isDead = true;
+					Instantiate (zombiePrefab,objectPoolPosition, gameObject.transform.rotation);
+
+				}
+
 
 			}
 		}
@@ -185,7 +192,7 @@ public class Zombie : MonoBehaviour {
 			float carY = this.transform.position.y;
 			float dx = carX - targetX;
 			float dy = carY - targetY;
-			if (dx * dx + dy * dy < 1.6) {
+			if (dx * dx + dy * dy < 0.1) {
 				
 					Destroy (this.gameObject);
 
@@ -201,7 +208,7 @@ public class Zombie : MonoBehaviour {
 		}
 		if (!isCarFound) {
 			if (other.GetComponent<MovingCenter> () != null) {
-				print ("out of center");
+//				print ("out of center");
 				this.rigi.velocity = (-1) * this.rigi.velocity;
 			}
 		}

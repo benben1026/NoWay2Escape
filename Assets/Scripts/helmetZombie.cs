@@ -20,6 +20,7 @@ public class helmetZombie : MonoBehaviour {
 	public float centery = 9.36f;
 	public int chasingCount = 0;
 	public int chasingCountThreadHold = 2;
+	public bool isDead = false;
 	private void Awake()
 	{
 		rigi = GetComponent<Rigidbody2D>();
@@ -178,9 +179,15 @@ public class helmetZombie : MonoBehaviour {
 				if (ishurt == false) {
 					ishurt = true;
 				} else {
+					print ("hit trap count");
 					Destroy (this.gameObject);
 					Vector2 objectPoolPosition = new Vector2 (zX, zY);
-					Instantiate (zombiePrefab,objectPoolPosition, gameObject.transform.rotation);
+					if (!this.isDead) {
+						isDead = true;
+						Instantiate (zombiePrefab,objectPoolPosition, gameObject.transform.rotation);
+
+					}
+						
 				}
 
 

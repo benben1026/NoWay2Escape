@@ -140,10 +140,13 @@ MonoBehaviour:
   targetY: 0
   constantV: 0
   ishurt: 0
-  zombiePrefab: {fileID: 1251267758562548, guid: dfc2f87d6d3e2409abd8dd1856d55f14,
+  zombiePrefab: {fileID: 1412009729153454, guid: d7e8c929b6e834697a27aa2cb363527b,
     type: 2}
   centerx: 12.5
   centery: 9.36
+  chasingCount: 0
+  chasingCountThreadHold: 2
+  isDead: 0
 --- !u!212 &212239630937268430
 SpriteRenderer:
   m_ObjectHideFlags: 1

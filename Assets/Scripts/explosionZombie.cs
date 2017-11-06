@@ -190,7 +190,7 @@ public class explosionZombie : MonoBehaviour {
 			float carY = this.transform.position.y;
 			float dx = carX - targetX;
 			float dy = carY - targetY;
-			if (dx * dx + dy * dy < 1.6) {
+			if (dx * dx + dy * dy < 0.1) {
 				explosion ();
 				Destroy (this.gameObject);
 //				
