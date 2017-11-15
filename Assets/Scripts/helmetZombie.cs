@@ -80,6 +80,7 @@ public class helmetZombie : MonoBehaviour {
 		Vector2 dir = (new Vector2(targetX,targetY)) - (new Vector2(selfX,selfY));
 		float cosangle = Vector2.Dot (dir, this.rigi.velocity)/(dir.magnitude * this.rigi.velocity.magnitude);
 		float angle = Mathf.Acos (cosangle);
+//		print (angle);
 		Vector2 currV = this.rigi.velocity;
 //		float alphx = currV.x;
 //		float alphy = currV.y;
@@ -105,8 +106,8 @@ public class helmetZombie : MonoBehaviour {
 
 		float x = this.rigi.velocity.x;
 		float y = this.rigi.velocity.y;
-		this.rigi.velocity = new Vector2(x * Mathf.Cos(angle) + y * Mathf.Sin(angle), (-1) * x * Mathf.Sin(angle) + y * Mathf.Cos(angle));
-		//this.rigi.velocity = Vector2.zero;
+		Vector2 nv = new Vector2(x * Mathf.Cos(angle) + y * Mathf.Sin(angle), (-1) * x * Mathf.Sin(angle) + y * Mathf.Cos(angle));
+		if(!float.IsNaN(nv.x)) this.rigi.velocity = nv;
 	}
 	void randomMove(){
 
