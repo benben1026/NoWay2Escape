@@ -187,15 +187,6 @@ public class Car : MonoBehaviour {
             this.rigi.velocity = this.rigi.velocity / CarConstant.AccScale;
             this.accelerateCountdown = CarConstant.AccNoOfFrames;
         }
-
-        //if (Input.GetKeyDown("z"))
-        //{
-        //    this.SetLandType(LandType.Grass);
-        //}
-        //if (Input.GetKeyDown("x"))
-        //{
-        //    this.SetLandType(LandType.Road);
-        //}
         
     }
 

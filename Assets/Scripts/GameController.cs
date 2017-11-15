@@ -29,7 +29,7 @@ public class GameController : MonoBehaviour {
 	void Start () {
         gameFalseInfo.enabled = false;
         gameWinInfo.enabled = false;
-        timeLeft = 120;
+        timeLeft = 30;
         updateTime();
         time = 0.0f;
         gameStatus = 0;
@@ -115,7 +115,7 @@ public class GameController : MonoBehaviour {
 
 	private void updateAccTiemLeft()
 	{
-		accTimeLeft.text = "Accelerate Time Left: " + Car.instance.accelerateTimeLeft;
+		accTimeLeft.text = "Dash Left: " + Car.instance.accelerateTimeLeft;
 	}
 	public void bonusTime(){
 //		print ("here to add bonus time 5s");

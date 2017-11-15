@@ -173,7 +173,6 @@ public class Zombie : MonoBehaviour {
 			float dx = zX - targetX;
 			float dy = zY - targetY;
 			if (dx * dx + dy * dy < 0.1) {
-				print ("hit trap count");
 				Destroy (this.gameObject);
 				Vector2 objectPoolPosition = new Vector2 (zX, zY);
 				if (!this.isDead) {

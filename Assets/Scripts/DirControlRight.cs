@@ -1,18 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DirControlRight : MonoBehaviour {
     public GameObject car;
+	public Image rightArrow;
 
-    private Vector3 offset;
     private bool ifInit;
+	private bool ifTurn;
 
     // Use this for initialization
     void Start () {
-        offset = new Vector3(-2f, -1f, 0);
-        gameObject.GetComponent<Renderer>().enabled = false;
+		rightArrow.enabled = false;
         ifInit = false;
+		ifTurn = false;
     }
 	
 	// Update is called once per frame
@@ -23,23 +25,19 @@ public class DirControlRight : MonoBehaviour {
         }
         if (!ifInit)
         {
-            gameObject.GetComponent<Renderer>().enabled = true;
+			rightArrow.enabled = true;
             ifInit = true;
         }
-		if (Input.touchCount > 0) 
-		{
-			for (int i = 0; i < Input.touchCount; i++) {
-				Touch touch = Input.GetTouch (i);
-				if (gameObject.GetComponent<Collider2D>() == Physics2D.OverlapPoint (new Vector2(touch.position.x, touch.position.y))) {
-					car.GetComponent<Car>().TurnRight();
-				}
-			}
+		if (ifTurn) {
+			car.GetComponent<Car> ().TurnRight ();
 		}
-        transform.position = car.transform.position + offset;
     }
 
-//    void OnMouseDrag()
-//    {
-//        car.GetComponent<Car>().TurnRight();
-//    }
+	public void StartTurningRight(){
+		ifTurn = true;
+	}
+
+	public void EndTurningRight(){
+		ifTurn = false;
+	}
 }

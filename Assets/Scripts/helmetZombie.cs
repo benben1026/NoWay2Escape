@@ -179,7 +179,6 @@ public class helmetZombie : MonoBehaviour {
 				if (ishurt == false) {
 					ishurt = true;
 				} else {
-					print ("hit trap count");
 					Destroy (this.gameObject);
 					Vector2 objectPoolPosition = new Vector2 (zX, zY);
 					if (!this.isDead) {
