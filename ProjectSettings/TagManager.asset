@@ -61,3 +61,6 @@ TagManager:
   - name: controller
     uniqueID: 1253439621
     locked: 0
+  - name: fog
+    uniqueID: 1136973019
+    locked: 0
