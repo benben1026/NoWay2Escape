@@ -55,8 +55,8 @@ public class Zombie : MonoBehaviour {
 		}
 
 		this.rigi.velocity = (float)GameController.instance.getSpeedFactor() * this.rigi.velocity;
-		if (this.rigi.velocity.magnitude > 2.5)
-			this.rigi.velocity = this.rigi.velocity * ((float)2.5 / this.rigi.velocity.magnitude);
+		if (this.rigi.velocity.magnitude > 2)
+			this.rigi.velocity = this.rigi.velocity * ((float)2 / this.rigi.velocity.magnitude);
 
 		if (isCarFound) {
 			chasing ();

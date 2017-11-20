@@ -99,7 +99,7 @@ public class GameController : MonoBehaviour {
 	}
 	void updateSpeedFacotor(){
 		distance = calculateDistance();
-		speedFactor += (initTime - timeLeft) * 0.0000001 + (initDistance - distance) * 0.0000001;
+		speedFactor += (initTime - timeLeft) * 0.00000001 + (initDistance - distance) * 0.00000001;
 	}
 	public double getSpeedFactor(){
 		return speedFactor;
