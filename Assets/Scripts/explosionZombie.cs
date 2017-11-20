@@ -55,7 +55,9 @@ public class explosionZombie : MonoBehaviour {
 			//			transform.Rotate(0, 0, 30 / Mathf.PI);
 		}
 
-
+		this.rigi.velocity = (float)GameController.instance.getSpeedFactor() * this.rigi.velocity;
+		if (this.rigi.velocity.magnitude > 2.5)
+			this.rigi.velocity = this.rigi.velocity * ((float)2.5 / this.rigi.velocity.magnitude);
 
 		if (isCarFound) {
 //			this.rigi.velocity = chasingVelocity;
