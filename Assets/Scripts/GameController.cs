@@ -17,6 +17,12 @@ public class GameController : MonoBehaviour {
     private float time;
     private GameStatus gameStatus;
     public GameObject gameWinPanel, gameFalsePanel;
+	private double speedFactor;
+	private int initTime;
+	private float initDistance;
+	private double distance;
+	private bool isFreezing;
+	private int freezCount;
 
 	// Use this for initialization
 	void Awake () {
@@ -27,19 +33,43 @@ public class GameController : MonoBehaviour {
 		}
 	}
 	void Start () {
+		freezCount = 80;
+		isFreezing = false;
+		speedFactor = 1;
         gameFalseInfo.enabled = false;
         gameWinInfo.enabled = false;
-        timeLeft = 30;
+        initTime = timeLeft = 30;
         updateTime();
         time = 0.0f;
         gameStatus = 0;
         gameStatus = GameStatus.prepare;
         gameWinPanel.SetActive(false);
         gameFalsePanel.SetActive(false);
+		initDistance = calculateDistance();
 	}
-	
+	float calculateDistance(){
+		float cx = Car.instance.transform.position.x;
+		float cy = Car.instance.transform.position.y;
+		cx -= DestinationFlag.instance.transform.position.x;
+		cy -= DestinationFlag.instance.transform.position.y;
+		return cx * cx + cy * cy;
+	}
+
+
+
 	// Update is called once per frame
 	void Update () {
+		updateSpeedFacotor ();
+		if (isFreezing) {
+			freezCount--;
+			if (freezCount == 0) {
+				freezCount = 80;
+				isFreezing = false;
+				speedFactor = 1;
+			}
+		} 
+
+//		print (speedFactor);
         if (gameStatus == GameStatus.prepare || gameStatus == GameStatus.starting)
         {
             if (Input.GetKeyDown("s") || Input.touchCount > 0)
@@ -66,6 +96,13 @@ public class GameController : MonoBehaviour {
             updateTime();
         }
         
+	}
+	void updateSpeedFacotor(){
+		distance = calculateDistance();
+		speedFactor += (initTime - timeLeft) * 0.00000001 + (initDistance - distance) * 0.00000001;
+	}
+	public double getSpeedFactor(){
+		return speedFactor;
 	}
 
 	public bool isGameStart()
@@ -120,5 +157,9 @@ public class GameController : MonoBehaviour {
 	public void bonusTime(){
 //		print ("here to add bonus time 5s");
 		this.timeLeft += 5;
+	}
+	public void freezAll(){
+		isFreezing = true;
+		speedFactor = 0;
 	}
 }

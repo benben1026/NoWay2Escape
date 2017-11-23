@@ -19,6 +19,7 @@ public class Zombie : MonoBehaviour {
 	public int chasingCount = 0;
 	public int chasingCountThreadHold = 2;
 	private bool isDead = false;
+//	private float speedFactor;
 
 	public GameObject zombiePrefab;
 	public GameObject movingCenter;
@@ -30,6 +31,7 @@ public class Zombie : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+//		speedFactor = 1;
 		constantV = 0.5f;
 		this.rigi.velocity = new Vector2(0f, constantV);
 		this.turningAngle = 0.02f; // Radian
@@ -52,7 +54,9 @@ public class Zombie : MonoBehaviour {
 			//			transform.Rotate(0, 0, 30 / Mathf.PI);
 		}
 
-
+		this.rigi.velocity = (float)GameController.instance.getSpeedFactor() * this.rigi.velocity;
+		if (this.rigi.velocity.magnitude > 2)
+			this.rigi.velocity = this.rigi.velocity * ((float)2 / this.rigi.velocity.magnitude);
 
 		if (isCarFound) {
 			chasing ();
