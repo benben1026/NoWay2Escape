@@ -55,7 +55,7 @@ public class Car : MonoBehaviour {
         carStatus = CarStatusType.Normal;
         landType = LandType.Road;
         ifDash = false;
-        dashCoolDownTimeCounter = 0;
+		dashCoolDownTimeCounter = CarConstant.DashCoolDownTime;
         move = 0;
     }
 
@@ -98,11 +98,19 @@ public class Car : MonoBehaviour {
 		return this.rigi.position;
 	}
 
-    public void Dash()
+	public bool IsDashReady(){
+		return this.dashCoolDownTimeCounter > CarConstant.DashCoolDownTime && this.accelerateTimeLeft > 0;
+	}
+
+    public bool Dash()
     {
-        if (this.dashCoolDownTimeCounter < CarConstant.DashCoolDownTime)
-            return;
-        ifDash = true;
+		if (!this.IsDashReady())
+			return false;
+		this.carStatus = CarStatusType.Accelerate;
+		this.rigi.velocity = CarConstant.AccScale * this.rigi.velocity;
+		this.accelerateTimeLeft--;
+		dashCoolDownTimeCounter = 0;
+		return true;
     }
 
     public void TurnLeft()
@@ -169,15 +177,15 @@ public class Car : MonoBehaviour {
         }
 
         dashCoolDownTimeCounter += Time.deltaTime;
-        if (ifDash && this.carStatus == CarStatusType.Normal && this.accelerateTimeLeft > 0)
-        {
-            this.carStatus = CarStatusType.Accelerate;
-            this.rigi.velocity = CarConstant.AccScale * this.rigi.velocity;
-            this.accelerateTimeLeft--;
-            ifDash = false;
-            dashCoolDownTimeCounter = 0;
-        }
-        else if(this.carStatus == CarStatusType.Accelerate && this.accelerateCountdown > 0)
+//        if (ifDash && this.carStatus == CarStatusType.Normal && this.accelerateTimeLeft > 0)
+//        {
+//            this.carStatus = CarStatusType.Accelerate;
+//            this.rigi.velocity = CarConstant.AccScale * this.rigi.velocity;
+//            this.accelerateTimeLeft--;
+//            ifDash = false;
+//            dashCoolDownTimeCounter = 0;
+//        }
+        if(this.carStatus == CarStatusType.Accelerate && this.accelerateCountdown > 0)
         {
             this.accelerateCountdown--;
         }

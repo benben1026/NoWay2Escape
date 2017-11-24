@@ -46,6 +46,8 @@ public class GameController : MonoBehaviour {
         gameWinPanel.SetActive(false);
         gameFalsePanel.SetActive(false);
 		initDistance = calculateDistance();
+		updateAccTiemLeft ();
+		updateTime ();
 	}
 	float calculateDistance(){
 		float cx = Car.instance.transform.position.x;
