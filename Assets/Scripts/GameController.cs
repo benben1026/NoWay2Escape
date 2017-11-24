@@ -159,6 +159,7 @@ public class GameController : MonoBehaviour {
 	public void bonusTime(){
 //		print ("here to add bonus time 5s");
 		this.timeLeft += 5;
+		updateTime ();
 	}
 	public void freezAll(){
 		isFreezing = true;
