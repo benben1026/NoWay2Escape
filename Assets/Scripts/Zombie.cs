@@ -20,7 +20,7 @@ public class Zombie : MonoBehaviour {
 	public int chasingCountThreadHold = 2;
 	private bool isDead = false;
 //	private float speedFactor;
-
+	private bool hitWall;
 	public GameObject zombiePrefab;
 	public GameObject movingCenter;
 
@@ -129,6 +129,7 @@ public class Zombie : MonoBehaviour {
 				Turningcount = 0;
 			}
 		}
+
 		float move = currentDir;
 		//		print(rigi.velocity.magnitude);
 
@@ -213,6 +214,7 @@ public class Zombie : MonoBehaviour {
 			if (other.GetComponent<MovingCenter> () != null) {
 //				print ("out of center");
 				this.rigi.velocity = (-1) * this.rigi.velocity;
+				hitWall = true;
 			}
 		}
 
