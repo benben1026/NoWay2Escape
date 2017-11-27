@@ -53,17 +53,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: EatCoin
-    clip: {fileID: 8300000, guid: 623efb583babe4dc1816ddca13e41180, type: 3}
+    clip: {fileID: 8300000, guid: 044885b893f02467bad02e792544c868, type: 3}
     volume: 1
     pitch: 1.41
     source: {fileID: 0}
   - name: GameOver
     clip: {fileID: 8300000, guid: a86672ed2955f4abcb41a6d9f9e95929, type: 3}
-    volume: 1
+    volume: 0.5
     pitch: 2.34
     source: {fileID: 0}
   - name: Freeze
     clip: {fileID: 8300000, guid: aba5246d50c2e4e21a1b4f52ffe4f5e3, type: 3}
+    volume: 1
+    pitch: 2.34
+    source: {fileID: 0}
+  - name: Explosion
+    clip: {fileID: 8300000, guid: 99b5eea824c2a4915b44598f1c564d53, type: 3}
     volume: 1
     pitch: 2.34
     source: {fileID: 0}

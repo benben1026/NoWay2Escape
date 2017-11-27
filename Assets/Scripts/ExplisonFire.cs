@@ -7,6 +7,7 @@ public class ExplisonFire : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		FindObjectOfType<AudioManager>().Play("Explosion");
 		expCount = 40;
 	}
 	
