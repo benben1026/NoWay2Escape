@@ -22,7 +22,8 @@ public class Zombie : MonoBehaviour {
 //	private float speedFactor;
 	private bool hitWall;
 	public GameObject zombiePrefab;
-	public GameObject movingCenter;
+	// public GameObject movingCenter;
+
 
 	private void Awake()
 	{
@@ -43,7 +44,7 @@ public class Zombie : MonoBehaviour {
 		isTurning = false;
 		Turningcount = 0;
 		isCarFound = false;
-		movingCenter = (GameObject)Instantiate (movingCenter, this.transform.position, gameObject.transform.rotation);
+		// movingCenter = (GameObject)Instantiate (movingCenter, this.transform.position, gameObject.transform.rotation);
 	}
 
 	// Update is called once per frame
@@ -196,9 +197,13 @@ public class Zombie : MonoBehaviour {
 			float carY = this.transform.position.y;
 			float dx = carX - targetX;
 			float dy = carY - targetY;
-			if (dx * dx + dy * dy < 0.1) {
-				
-					Destroy (this.gameObject);
+			if (dx * dx + dy * dy < 0.8) {
+				float zX = this.transform.position.x;
+				float zY = this.transform.position.y;
+				Vector2 objectPoolPosition = new Vector2 (zX, zY);
+				Instantiate (zombiePrefab,objectPoolPosition, gameObject.transform.rotation);
+
+				Destroy (this.gameObject);
 
 			}
 		}
@@ -207,16 +212,16 @@ public class Zombie : MonoBehaviour {
 	private void OnTriggerExit2D(Collider2D other){
 		if (other.GetComponent<Car> () != null) {
 			isCarFound = false;
-			Destroy (this.movingCenter.gameObject);
-			movingCenter = (GameObject)Instantiate (movingCenter, this.transform.position, gameObject.transform.rotation);
+			// Destroy (this.movingCenter.gameObject);
+			// movingCenter = (GameObject)Instantiate (movingCenter, this.transform.position, gameObject.transform.rotation);
 		}
-		if (!isCarFound) {
-			if (other.GetComponent<MovingCenter> () != null) {
-//				print ("out of center");
-				this.rigi.velocity = (-1) * this.rigi.velocity;
-				hitWall = true;
-			}
-		}
+// 		if (!isCarFound) {
+// 			if (other.GetComponent<MovingCenter> () != null) {
+// //				print ("out of center");
+// 				this.rigi.velocity = (-1) * this.rigi.velocity;
+// 				hitWall = true;
+// 			}
+// 		}
 
 
 
