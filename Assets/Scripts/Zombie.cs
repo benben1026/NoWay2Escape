@@ -54,7 +54,7 @@ public class Zombie : MonoBehaviour {
 			//			transform.Rotate(0, 0, 30 / Mathf.PI);
 		}
 
-		this.rigi.velocity = (float)GameController.instance.getSpeedFactor() * this.rigi.velocity;
+		this.rigi.velocity = (float) GameController.instance.getSpeedFactor() * this.rigi.velocity;
 		if (this.rigi.velocity.magnitude > 2)
 			this.rigi.velocity = this.rigi.velocity * ((float)2 / this.rigi.velocity.magnitude);
 
