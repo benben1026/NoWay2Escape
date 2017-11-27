@@ -138,7 +138,7 @@ public class GameController : MonoBehaviour {
 		if (gameStatus == GameStatus.win) {
 			return;
 		}
-		stingSource.Play();	
+		//stingSource.Play();	
         gameStatus = GameStatus.fail;
         gameFalseInfo.text = "Game Over";
 
