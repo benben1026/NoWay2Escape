@@ -12,7 +12,8 @@ public class GameController : MonoBehaviour {
     public Text countDownText;
 	public Text accTimeLeft;
     public enum GameStatus { prepare, starting, start, win, fail};
-    
+
+    private int sceneIndex;
     private int timeLeft;
     private float time;
     private GameStatus gameStatus;
@@ -33,9 +34,10 @@ public class GameController : MonoBehaviour {
 		}
 	}
 	void Start () {
-		freezCount = 80;
+        sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        freezCount = 80;
 		isFreezing = false;
-		speedFactor = 1;
+        speedFactor = 1;
         gameFalseInfo.enabled = false;
         gameWinInfo.enabled = false;
         initTime = timeLeft = 30;
@@ -100,8 +102,9 @@ public class GameController : MonoBehaviour {
         
 	}
 	void updateSpeedFacotor(){
-		distance = calculateDistance();
-		speedFactor += (initTime - timeLeft) * 0.00000001 + (initDistance - distance) * 0.00000001;
+        distance = calculateDistance();
+        double slope = sceneIndex * 0.00000001;
+        speedFactor += (initTime - timeLeft) * slope + (initDistance - distance) * slope;
 	}
 	public double getSpeedFactor(){
 		return speedFactor;

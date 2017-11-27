@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ZombiePool : MonoBehaviour {
 
@@ -18,10 +19,10 @@ public class ZombiePool : MonoBehaviour {
 
 	public int threadHold = 5;
 	private Vector2 objectPoolPosition;
-	//private int radius = 2;
+    //private int radius = 2;
 
 
-
+    private int sceneIndex;
 	public List<GameObject> pooledObjects;
 	public GameObject objectToPool;
 	public int amountToPool;
@@ -30,6 +31,7 @@ public class ZombiePool : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        sceneIndex = SceneManager.GetActiveScene().buildIndex;
 		this.zombiePoolSize = 30;
 		Vector3 flagPositon = DestinationFlag.instance.transform.position;
 		Vector3 carPosition = Car.instance.transform.position;
@@ -51,7 +53,7 @@ public class ZombiePool : MonoBehaviour {
 			}
 			float probability = (distanceToCar / uniformDistance >= 1) ? 0.99f : distanceToCar / uniformDistance;
 			if (rnd.NextDouble () < probability) {
-				int typeDetermine = rnd.Next (0, 10);
+				int typeDetermine = sceneIndex == 1 ? rnd.Next(0, 7) : rnd.Next (0, 10);
 				objectPoolPosition = new Vector2(pos_x, pos_y);
 				GameObject tmp;
 				if (typeDetermine <= 3) {
