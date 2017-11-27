@@ -22,8 +22,8 @@ public class GameController : MonoBehaviour {
 	private int initTime;
 	private float initDistance;
 	private double distance;
-	private bool isFreezing;
-	private int freezCount;
+	public  bool isFreezing;
+	public  int freezCount;
 
 	// Use this for initialization
 	void Awake () {

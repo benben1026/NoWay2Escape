@@ -22,7 +22,7 @@ class CarConstant
 public class Car : MonoBehaviour {
     public int accelerateTimeLeft;
 	public static Car instance;
-    public enum CarStatusType { Normal, Accelerate, Die, Win };
+    public enum CarStatusType { Normal, Accelerate, Freeze, Die, Win };
     public enum LandType { Grass, Road };
 
     private Rigidbody2D rigi;
@@ -34,6 +34,8 @@ public class Car : MonoBehaviour {
     private bool ifDash;
     private float dashCoolDownTimeCounter;
     private float move;
+    private Vector2 originVelocity;
+    private int freezeTimeCount;
     
     
     private void Awake()
@@ -57,6 +59,7 @@ public class Car : MonoBehaviour {
         ifDash = false;
 		dashCoolDownTimeCounter = CarConstant.DashCoolDownTime;
         move = 0;
+        this.freezeTimeCount = 0;
     }
 
     private void Init()
@@ -113,6 +116,16 @@ public class Car : MonoBehaviour {
 		return true;
     }
 
+    public void Freeze(){
+        if (carStatus == CarStatusType.Freeze){
+            return;
+        }
+        this.originVelocity = this.rigi.velocity;
+        this.rigi.velocity = Vector2.zero;
+        this.carStatus = CarStatusType.Freeze;
+        this.freezeTimeCount = 0;
+    }
+
     public void TurnLeft()
     {
         move = -1;
@@ -140,6 +153,17 @@ public class Car : MonoBehaviour {
         {
             Init();
             ifInit = true;
+        }
+
+
+        if (this.carStatus == CarStatusType.Freeze && this.freezeTimeCount > 30){
+            this.freezeTimeCount = 0;
+            this.carStatus = CarStatusType.Normal;
+            this.rigi.velocity = this.originVelocity;
+            return;
+        } else if (this.carStatus == CarStatusType.Freeze) {
+            this.freezeTimeCount ++;
+            return;
         }
 
         //float move = Input.GetAxis("Horizontal");
@@ -232,9 +256,11 @@ public class Car : MonoBehaviour {
 			float carY = this.transform.position.y;
 			float dx = carX - targetX;
 			float dy = carY - targetY;
-			if (dx * dx + dy * dy < 0.1) {
-				GameController.instance.gameOver ();
-			}
+            this.Freeze();
+			// if (dx * dx + dy * dy < 0.4) {
+			// 	//GameController.instance.gameOver ();
+   //              this.Freeze();
+			// }
 		}
 	}
 
