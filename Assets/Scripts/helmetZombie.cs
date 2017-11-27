@@ -202,7 +202,12 @@ public class helmetZombie : MonoBehaviour {
 			float carY = this.transform.position.y;
 			float dx = carX - targetX;
 			float dy = carY - targetY;
-			if (dx * dx + dy * dy < 0.1) {
+			if (dx * dx + dy * dy < 0.8) {
+				float zX = this.transform.position.x;
+				float zY = this.transform.position.y;
+				Vector2 objectPoolPosition = new Vector2 (zX, zY);
+				Instantiate (zombiePrefab,objectPoolPosition, gameObject.transform.rotation);
+
 				Destroy (this.gameObject);
 
 			}

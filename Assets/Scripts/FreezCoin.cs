@@ -7,9 +7,13 @@ public class FreezCoin : MonoBehaviour {
 	private int effectCount = 0;
 	private int limite = 10;
 	private bool used = false;
+	public AudioClip[] stings;
+    public AudioSource stingSource;
 
 	// Use this for initialization
 	void Start () {
+	stingSource = GetComponent<AudioSource>();
+	stingSource.clip = stings[0];
 
 	}
 
@@ -21,12 +25,14 @@ public class FreezCoin : MonoBehaviour {
 	}
 	private void OnTriggerEnter2D(Collider2D other){
 		if (other.GetComponent<Car> () != null && used) {
+		    stingSource.Play();	
 			GameController.instance.freezAll ();
 
 			FindObjectOfType<AudioManager>().Play("Freeze");
 
 			used = false;
-			Destroy (this.gameObject);
+			this.gameObject.GetComponent<Renderer>().enabled = false;
+			//Destroy (this.gameObject);
 		}
 	}
 

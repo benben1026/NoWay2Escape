@@ -7,10 +7,14 @@ public class Coin : MonoBehaviour {
 	private int effectCount = 0;
 	private int limite = 10;
 	private bool used = false;
+	public AudioClip[] stings;
+    public AudioSource stingSource;
 
 	// Use this for initialization
 	void Start () {
-		
+	stingSource = GetComponent<AudioSource>();
+	stingSource.clip = stings[0];
+	
 	}
 	
 	// Update is called once per frame
@@ -20,14 +24,17 @@ public class Coin : MonoBehaviour {
 			used = true;
 	}
 	private void OnTriggerEnter2D(Collider2D other){
+	     	
 		if (other.GetComponent<Car> () != null && used) {
+	    	stingSource.Play();	
 			GameController.instance.bonusTime ();
 			used = false;
 
 			FindObjectOfType<AudioManager>().Play("EatCoin");
 
-			Destroy (this.gameObject);
+			this.gameObject.GetComponent<Renderer>().enabled = false;
+			//Destroy (this.gameObject);
+
 		}
 	}
-		
 }

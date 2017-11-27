@@ -250,12 +250,12 @@ public class Car : MonoBehaviour {
 
 		} else if (other.GetComponent<ExplisonFire> () != null && this.carStatus != CarStatusType.Accelerate) {
 
-			float targetX = other.transform.position.x;
-			float targetY = other.transform.position.y;
-			float carX = this.transform.position.x;
-			float carY = this.transform.position.y;
-			float dx = carX - targetX;
-			float dy = carY - targetY;
+			// float targetX = other.transform.position.x;
+			// float targetY = other.transform.position.y;
+			// float carX = this.transform.position.x;
+			// float carY = this.transform.position.y;
+			// float dx = carX - targetX;
+			// float dy = carY - targetY;
             this.Freeze();
 			// if (dx * dx + dy * dy < 0.4) {
 			// 	//GameController.instance.gameOver ();
