@@ -22,6 +22,9 @@ public class FreezCoin : MonoBehaviour {
 	private void OnTriggerEnter2D(Collider2D other){
 		if (other.GetComponent<Car> () != null && used) {
 			GameController.instance.freezAll ();
+
+			FindObjectOfType<AudioManager>().Play("Freeze");
+
 			used = false;
 			Destroy (this.gameObject);
 		}

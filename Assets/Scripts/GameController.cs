@@ -132,6 +132,9 @@ public class GameController : MonoBehaviour {
 		}
         gameStatus = GameStatus.fail;
         gameFalseInfo.text = "Game Over";
+
+		FindObjectOfType<AudioManager>().Play("GameOver");
+
         gameFalseInfo.enabled = true;
         Car.instance.SetCarStatus(Car.CarStatusType.Die);
         gameFalsePanel.SetActive(true);

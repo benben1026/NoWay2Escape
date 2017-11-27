@@ -23,6 +23,9 @@ public class Coin : MonoBehaviour {
 		if (other.GetComponent<Car> () != null && used) {
 			GameController.instance.bonusTime ();
 			used = false;
+
+			FindObjectOfType<AudioManager>().Play("EatCoin");
+
 			Destroy (this.gameObject);
 		}
 	}
