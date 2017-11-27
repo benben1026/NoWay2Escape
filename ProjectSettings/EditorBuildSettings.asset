@@ -11,3 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/car.unity
     guid: b3b6fb37cf7b64ccc9a9caf0461584f3
+  - enabled: 1
+    path: Assets/Scenes/night.unity
+    guid: 1a2796181eb584ce2aead0333c0a743e
