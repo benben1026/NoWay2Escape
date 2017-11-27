@@ -6,6 +6,10 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
+
+    private AudioSource stingSource;
+	public AudioClip[] stings;
+	
 	public static GameController instance;
     public Text gameFalseInfo;
     public Text gameWinInfo;
@@ -24,6 +28,7 @@ public class GameController : MonoBehaviour {
 	private double distance;
 	public  bool isFreezing;
 	public  int freezCount;
+	
 
 	// Use this for initialization
 	void Awake () {
@@ -50,6 +55,9 @@ public class GameController : MonoBehaviour {
 		initDistance = calculateDistance();
 		updateAccTiemLeft ();
 		updateTime ();
+		
+		stingSource = GetComponent<AudioSource>();
+	    stingSource.clip = stings[0];
 	}
 	float calculateDistance(){
 		float cx = Car.instance.transform.position.x;
@@ -130,6 +138,7 @@ public class GameController : MonoBehaviour {
 		if (gameStatus == GameStatus.win) {
 			return;
 		}
+		stingSource.Play();	
         gameStatus = GameStatus.fail;
         gameFalseInfo.text = "Game Over";
 
